@@ -34,14 +34,12 @@ function build_library()
 {
 
 	cd $APP_DIR/ncnn/
-	rm build -rf
 	mkdir build
 	cd build
 	cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-buildroot-gnueabihf.toolchain.cmake ..
 	make -j${logicalNumber}
 
 	cd $APP_DIR/libfacedetection/
-	rm build -rf
 	mkdir build
 	cd build
 	cmake ../
