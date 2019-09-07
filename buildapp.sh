@@ -43,7 +43,6 @@ function build_library()
 	mkdir build
 	cd build
 	cmake ../
-	make clean
 	make -j${logicalNumber}
 
 }
@@ -127,7 +126,6 @@ function build_demos()
 	mkdir build
 	cd build
 	cmake ../
-	make clean
 	make -j${logicalNumber}
 }
 
