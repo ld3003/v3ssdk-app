@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: libkmod
+Description: Library to deal with kernel modules
+Version: 24
+Libs: -L${libdir} -lkmod
+Libs.private:  -L/media/user1/V3SSDK_BUILDROOT/v3ssdk/buildroot/out/host/bin/../arm-buildroot-linux-gnueabihf/sysroot/usr/lib -lz  
+Cflags: -I${includedir}
