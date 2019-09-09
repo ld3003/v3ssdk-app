@@ -20,8 +20,8 @@ extern "C" {
 #define CAM_VIDEO_W         640
 #define CAM_VIDEO_H         480
 
-#define DEV_WINDOWS_W       272
-#define DEV_WINDOWS_H       480
+#define DEV_WINDOWS_W       240
+#define DEV_WINDOWS_H       320
 #ifdef arm
 #define ETH_NAME            "eth0"
 #endif

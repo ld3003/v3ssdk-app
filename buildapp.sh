@@ -70,7 +70,7 @@ function build_demos()
 	cd $APP_DIR/demo-qt
 	echo "*****************************************"
 	pwd
-	$TOP_DIR/buildroot/out/host/bin/qmake
+	qmake
 	make -j${logicalNumber}
 
 	cd $APP_DIR/opencv
@@ -122,11 +122,17 @@ function build_demos()
 	cd $APP_DIR/facenet/
 	echo "*****************************************"
 	pwd
-	rm build -rf
 	mkdir build
 	cd build
 	cmake ../
 	make -j${logicalNumber}
+
+	cd $APP_DIR/mjpg_srv
+	echo "*****************************************"
+	pwd
+	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
+
+
 }
 
 function clean_demos()

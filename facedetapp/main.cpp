@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 
 
 #ifdef arm
+#if 0
     QGraphicsScene scene;
     QGraphicsView view;
     scene.addWidget(&w);//添加到场景
@@ -28,7 +29,10 @@ int main(int argc, char *argv[])
     view.setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);//隐藏滚动条
     view.resize(DEV_WINDOWS_H, DEV_WINDOWS_W);
     view.show();
-    view.rotate(90);
+    //view.rotate(90);
+#else
+    w.show();
+#endif
 #endif
 
 #ifdef x86_64

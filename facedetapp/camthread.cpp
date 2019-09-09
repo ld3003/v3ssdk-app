@@ -47,8 +47,8 @@ void CamThread::run()
 
         mImglocker.lock();
         *mCap >> mImageData1;
-        cv::Rect rect(184, 0, DEV_WINDOWS_W, DEV_WINDOWS_H);
-        mImageData1 = mImageData1(rect);
+        //cv::Rect rect(184, 0, DEV_WINDOWS_W, DEV_WINDOWS_H);
+        //mImageData1 = mImageData1(rect);
         mImageData2 = mImageData1;
 
         //time_consuming_print("fetch img time 1",&gTpstart,&gTpend);
@@ -57,7 +57,7 @@ void CamThread::run()
         if (mImageData1.empty())
             continue;
 
-#define RESIZE_VAL 1
+#define RESIZE_VAL 2
         cv::resize(mImageData1, mImageData1, cv::Size(mImageData1.cols/RESIZE_VAL, mImageData1.rows/RESIZE_VAL),0,0);
 
         //time_consuming_print("fetch img time 2",&gTpstart,&gTpend);
