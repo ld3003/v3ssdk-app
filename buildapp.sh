@@ -70,7 +70,7 @@ function build_demos()
 	cd $APP_DIR/demo-qt
 	echo "*****************************************"
 	pwd
-	$TOP_DIR/buildroot/out/host/bin/qmake
+	qmake
 	make -j${logicalNumber}
 
 	cd $APP_DIR/opencv
