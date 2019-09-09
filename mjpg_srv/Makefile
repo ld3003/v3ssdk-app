@@ -55,7 +55,7 @@ OBJ_CPP := $(patsubst %.cpp,%.o,$(SRC_CPP))
 
 
 # executable file
-target = cam4g
+target = mjpg_srv
 
 ###############################################################################
 

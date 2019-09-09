@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <string.h>
-
+#include <opencv2/opencv.hpp>
 
 MjpgServerClass g_MjpgServer;
 
@@ -12,7 +12,7 @@ unsigned int g_Img1Size;
 unsigned char * g_Img1Data;
 unsigned int g_Img2Size;
 unsigned char * g_Img2Data;
-
+cv::VideoCapture *g_cap;
 
 
 /*
@@ -78,15 +78,40 @@ int main(int argc,char ** argv)
     Load_File("Motorcycle.jpg",&g_Img1Data, &g_Img1Size);
     Load_File("Bart.jpg",&g_Img2Data, &g_Img2Size);
 
+
+     g_cap = new cv::VideoCapture(0);
+
+     if (g_cap->isOpened())
+     {
+	     printf("opencamera success\n");
+     }
+     else
+     {
+	     printf("opencamera error\n");
+	     return -1;
+     }
+
+
     for (;;)
     {
-        g_MjpgServer.Send_New_Image(g_Img1Data,g_Img1Size);
-        g_MjpgServer.Process();
-        usleep(1000*1000);
 
-        g_MjpgServer.Send_New_Image(g_Img2Data,g_Img2Size);
-        g_MjpgServer.Process();
-        usleep(1000*1000);
+
+	    cv::Mat frame;
+	    *g_cap >> frame;
+	    if (frame.empty())
+		    continue;
+
+	    std::vector<unsigned char> outbuf;
+	    std::vector<int> params;
+
+	    params.push_back(CV_IMWRITE_JPEG_QUALITY);
+	    params.push_back(100);
+	    cv::imencode(".jpg", frame, outbuf, params);
+
+	    printf("img len %d \n",outbuf.size());
+
+	    g_MjpgServer.Send_New_Image(outbuf.data(),(unsigned int)outbuf.size());
+	    g_MjpgServer.Process();
     }
 
 
