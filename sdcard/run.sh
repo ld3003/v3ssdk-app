@@ -1,11 +1,14 @@
 #!/bin/sh
 
-#启动wifi sta 模式
+#small tft
+ln -sf /dev/fb8 /dev/fb0
+
+#run wifi sta
 #wpa_supplicant -D wext -iwlan0 -c/root/sdcard/wpa_supplicant.conf &
 #udhcpc -iwlan0 &
 
-#启动wifi softap 模式
-hostapd /etc/hostapd.conf
+#run wifi hostap
+#hostapd /etc/hostapd.conf
 
 cd /root/sdcard/
 demo-camera
