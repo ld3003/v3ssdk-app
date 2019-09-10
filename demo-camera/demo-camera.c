@@ -187,6 +187,8 @@ int main(int argc, const char **argv)
 	argb_ptr = malloc(camera.fmt.fmt.pix.width * camera.fmt.fmt.pix.height * 4);
 
 	fps_time_mark = get_timestamp();
+
+	exit(0);
 	
 	while (1) {
 		if ((opt_snapshot_num >= 0) && (--opt_snapshot_num < 0)) {

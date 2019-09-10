@@ -7,5 +7,9 @@
 #启动wifi softap 模式
 hostapd /etc/hostapd.conf
 
+cd /root/sdcard/
+demo-camera
+demo-qt -qws &
+
 
 
