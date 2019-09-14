@@ -28,7 +28,6 @@ SOURCES += \
         Common/Common.c \
         Common/Common_nh_type.c \
         Communiction/Communiction.c \
-        faceregrequest.cpp \
         main.cpp \
         mainwindow.cpp \
         camthread.cpp \

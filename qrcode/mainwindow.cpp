@@ -13,8 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     mw = this;
-    showFullScreen();
     ui->setupUi(this);
+
+    showFullScreen();
 
 
     camThread = new CamThread(0);

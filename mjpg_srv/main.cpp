@@ -79,7 +79,7 @@ int main(int argc,char ** argv)
     Load_File("Bart.jpg",&g_Img2Data, &g_Img2Size);
 
 
-     g_cap = new cv::VideoCapture(0);
+     g_cap = new cv::VideoCapture(1);
 
      if (g_cap->isOpened())
      {
@@ -105,7 +105,7 @@ int main(int argc,char ** argv)
 	    std::vector<int> params;
 
 	    params.push_back(CV_IMWRITE_JPEG_QUALITY);
-	    params.push_back(100);
+	    params.push_back(50);
 	    cv::imencode(".jpg", frame, outbuf, params);
 
 	    printf("img len %d \n",outbuf.size());

@@ -24,11 +24,16 @@ CamThread::CamThread(QObject *obj)
     if( mCap->isOpened())
     {
         qDebug() <<"opencamera success" ;
+        mCap->release();
     }
     else
     {
         qDebug() << "opencamera error" ;
     }
+
+    mCap = new cv::VideoCapture(1);
+
+    mCap->set(CV_CAP_PROP_FPS, 10);
 
 
 }
@@ -43,7 +48,8 @@ void CamThread::run()
     {
         mImglocker.lock();
         *mCap >> mImageData2;
-        mImageData2 = mImageData2(cv::Rect(160 , 120 , 320 , 240));
+        mImageData2 = mImageData2(cv::Rect(150 , 80 , 240 , 320));
+        cv::flip(mImageData2, mImageData2, 1);
         mImglocker.unlock();
 
 
