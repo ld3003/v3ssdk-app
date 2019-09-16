@@ -27,7 +27,7 @@ void CamThread::run()
     QImage Img;
     cv::Mat tmppic0,tmppic;
 
-    mCap = new cv::VideoCapture(0);
+    mCap = new cv::VideoCapture(1);
 
     if( mCap->isOpened())
     {
@@ -57,7 +57,7 @@ void CamThread::run()
         if (mImageData1.empty())
             continue;
 
-#define RESIZE_VAL 2
+#define RESIZE_VAL 3
         cv::resize(mImageData1, mImageData1, cv::Size(mImageData1.cols/RESIZE_VAL, mImageData1.rows/RESIZE_VAL),0,0);
 
         //time_consuming_print("fetch img time 2",&gTpstart,&gTpend);
