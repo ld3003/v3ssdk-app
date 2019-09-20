@@ -20,5 +20,5 @@ private:
 
 double calculSimilar(std::vector<float>& v1, std::vector<float>& v2);
 
-
+double euclidean_distance(std::vector<float>& v1, std::vector<float>& v2);
 #endif // !MOBILEFACENET_H_

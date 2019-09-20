@@ -63,6 +63,7 @@ void FaceRegRequest::setFace(cv::Mat face)
 }
 void FaceRegRequest::run()
 {
+    /*
     char filename[64];
 
     struct timeval gTpstart ,gTpend;
@@ -82,5 +83,6 @@ void FaceRegRequest::run()
     DeleteFileOrFolder(QString(filename));
 
     QMetaObject::invokeMethod(mw,"tipmsg",Q_ARG(QString,QString((char*)resu.resp)));
+    */
 
 }

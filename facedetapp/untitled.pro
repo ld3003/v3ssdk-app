@@ -11,7 +11,7 @@ DEFINES += $${QT_ARCH}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = untitled
+TARGET = facenet
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -41,7 +41,8 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         camthread.cpp \
-        detectthread.cpp
+        detectthread.cpp \
+    comparethread.cpp
 
 HEADERS += \
         Common/Common.h \
@@ -54,7 +55,8 @@ HEADERS += \
         camthread.h \
         detectthread.h \
         mobilefacenet.h \
-        ui_mainwindow.h
+        ui_mainwindow.h \
+    comparethread.h
 
 FORMS += \
         mainwindow.ui
@@ -104,3 +106,6 @@ contains(DEFINES,x86_64){
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images.qrc

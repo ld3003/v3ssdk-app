@@ -1,1 +1,8 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/pic">
+        <file>img/right.png</file>
+        <file>img/wrong.png</file>
+        <file>img/right.jpg</file>
+        <file>img/wrong.jpg</file>
+    </qresource>
+</RCC>

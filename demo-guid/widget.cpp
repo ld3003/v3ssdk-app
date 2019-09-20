@@ -62,8 +62,10 @@ void Widget::keyPressEvent(QKeyEvent *event)
 
     if(event->key()==KEY4)
     {
-        if(key_index==0)
-            system("/root/sdcard/./qrcode -qws");
+        if(key_index==1)
+            system("./qrcode -qws");
+        else if(key_index==0)
+            system("./facenet -qws");
     }
     update();
 
