@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/myp">
+        <file>images/green.jpg</file>
+        <file>images/red.jpg</file>
+        <file>images/greenb.jpg</file>
+        <file>images/redb.JPG</file>
+    </qresource>
+</RCC>
