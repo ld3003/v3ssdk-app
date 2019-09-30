@@ -11,8 +11,7 @@ ln -sf /dev/fb8 /dev/fb0
 #hostapd /etc/hostapd.conf
 
 cd /root/sdcard/
-demo-camera
-demo-qt -qws &
+demo-guid &
 
 
 
