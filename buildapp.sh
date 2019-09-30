@@ -72,6 +72,24 @@ function build_demos()
 	pwd
 	qmake
 	make -j${logicalNumber}
+	
+	cd $APP_DIR/demo-guid
+	echo "*****************************************"
+	pwd
+	qmake
+	make -j${logicalNumber}
+	
+	cd $APP_DIR/demo-mjpgsrv
+	echo "*****************************************"
+	pwd
+	qmake
+	make -j${logicalNumber}
+	
+	cd $APP_DIR/demo-router
+	echo "*****************************************"
+	pwd
+	qmake
+	make -j${logicalNumber}
 
 	cd $APP_DIR/opencv
 	echo "*****************************************"
