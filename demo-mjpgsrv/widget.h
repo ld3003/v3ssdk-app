@@ -17,6 +17,7 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
     serverthread* sthd;
+     void keyPressEvent(QKeyEvent *event);
 public slots:
     void updateclientcnt(QString str);
 

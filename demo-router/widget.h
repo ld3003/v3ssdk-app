@@ -12,6 +12,7 @@
 #include <pthread.h>
 #include <signal.h>
 #include <QLabel>
+#include <QProcess>
 #define OP_OK 0
 #define OP_ERROR 1
 static void process_recv_serialport(int fd)
@@ -69,6 +70,15 @@ public:
     QString cops;
     QString band;
     void keyPressEvent(QKeyEvent *event);
+    QString m_lanip,m_4gip;
+    void getip();
+    bool islanworking();
+    bool isworking;
+    bool hastabled;
+    void iptable(QString desip);
+    void delay(int ms);
+    QProcess* p1;
+    QProcess* p2;
 public slots:
     void ask_timeout();
     void update4gs(int flag,int ceq,QString cops,QString band);

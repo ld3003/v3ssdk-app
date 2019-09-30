@@ -45,6 +45,7 @@ public:
     QVBoxLayout *verticalLayout_7;
     QLabel *label;
     QLabel *label_2;
+    QLabel *label_3;
     QSpacerItem *verticalSpacer_2;
 
     void setupUi(QWidget *Widget)
@@ -151,6 +152,11 @@ public:
 
         verticalLayout_7->addWidget(label_2);
 
+        label_3 = new QLabel(groupBox_2);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        verticalLayout_7->addWidget(label_3);
+
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_7->addItem(verticalSpacer_2);
@@ -180,8 +186,9 @@ public:
         labelonlinecops->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
         labelband->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("Widget", "wifi info", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("Widget", "ssid:Yisuwangluo", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("Widget", "password:Yisuwangluo", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("Widget", "ssid:V3S-ESP8089", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("Widget", "password:88888888", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QString());
     } // retranslateUi
 
 };

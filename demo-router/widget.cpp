@@ -6,6 +6,8 @@
 #include <QFont>
 #include <QGroupBox>
 #include <QKeyEvent>
+#include <QNetworkInterface>
+
 int Widget::serial=-1;
 #define MAX_AT_CNT 6
 #define KEY1 16777220
@@ -21,8 +23,10 @@ Widget::Widget(QWidget *parent) :
     mwgt=this;
     setWindowFlags(Qt::FramelessWindowHint);
     setWindowOpacity(0.7);
-    configserial();
+
     sendindex=0;
+    m_4gip="";
+    m_lanip="";
 
 
     QFont ft;
@@ -34,17 +38,37 @@ Widget::Widget(QWidget *parent) :
 
     ui->groupBox->setFont(ft);
     ui->groupBox_2->setFont(ft);
-//iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to-source 192.168.2.1 --privileged
-//iptables -t nat -A POSTROUTING -s 192.168.10.0/24  -o eth0  -j MASQUERADE
-    //post-up iptables -t nat -A POSTROUTING -s '192.168.10.0/24' -o eth0 -j MASQUERADE
-    //post-down iptables -t nat -D POSTROUTING -s '192.168.10.0/24' -o eth0 -j MASQUERADE
-    //system("/root/sdcard/./qrcode -qws");
-
-
     ui->label->setFont(ft);
     ui->label_2->setFont(ft);
+    ui->label_3->setFont(ft);
+
+
+    getip();
+
+
 
     system("sh /root/sdcard/hostap.sh");
+
+
+
+    system("sh /root/usb-set-hostmode.sh");
+
+    delay(2000);
+
+
+
+
+    isworking=islanworking();
+    qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<isworking;
+
+
+    hastabled=FALSE;
+    p1=new QProcess();
+    p2=new QProcess();
+
+     configserial();
+
+
 }
 
 Widget::~Widget()
@@ -81,15 +105,12 @@ void Widget::configserial()
 
         memset(sendbuf,0,512);
 
-       // qDebug()<<"start serial thread!";
-     //   m_preadThread=new serialreadthread(this);
-    //    m_preadThread->start();
 
         qDebug()<<"start ask timer!";
         m_pTimer=new QTimer;
-       // m_pTimer->setInterval(1000);
+
         connect(m_pTimer,SIGNAL(timeout()),this,SLOT(ask_timeout()));
-        m_pTimer->start(500);
+        m_pTimer->start(2000);
     }
 }
 
@@ -101,8 +122,77 @@ void Widget::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void Widget::getip()
+{
+    QList<QNetworkInterface> list=QNetworkInterface::allInterfaces();
+    foreach(QNetworkInterface interface,list)
+    {
+        qDebug()<<"Device:"<<interface.name();
+        qDebug()<<"HardwareAddress:"<<interface.hardwareAddress();
+        QList<QNetworkAddressEntry> entryList=interface.addressEntries();
+        foreach(QNetworkAddressEntry entry,entryList)
+        {//便利ip条目列表
+            qDebug()<<"IP address:"<<entry.ip().toString();
+            qDebug()<<"Netmask:"<<entry.netmask().toString();//获取子网掩码
+            qDebug()<<"Broadcast:"<<entry.broadcast().toString();//获取广播地址
+
+            if(interface.name()=="eth1")
+            {
+                if(entry.ip().protocol()==QAbstractSocket::IPv4Protocol)
+                    m_4gip=entry.ip().toString();
+            }
+            else  if(interface.name()=="eth0")
+            {
+                if(entry.ip().protocol()==QAbstractSocket::IPv4Protocol)
+                    m_lanip=entry.ip().toString();
+            }
+
+        }
+   }
+}
+
+bool Widget::islanworking()
+{
+    QString network_cmd = "ping www.baidu.com -c 1 -w 500";
+    QString result;
+    QProcess *network_process;
+    network_process = new QProcess();    //不要加this
+    network_process->start(network_cmd);   //调用ping 指令
+    network_process->waitForFinished();    //等待指令执行完毕
+    result = network_process->readAll();   //获取指令执行结果
+    if(result.contains(QString("ttl=")))   //若包含TTL=字符串则认为网络在线
+    {
+       return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+
+}
+
+void Widget::iptable(QString desip)
+{
+    system("iptables -t nat -F");
+    system("iptables -t nat -X");
+    system("iptables -t nat -Z");
+    QString str=QString("iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to %1").arg(desip);
+    qDebug()<<str;
+    system(str.toLocal8Bit().data());
+
+    //192.168.2.138
+}
+
+void Widget::delay(int ms)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(ms);
+     while( QTime::currentTime() < dieTime )
+     QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
 void Widget::ask_timeout()
 {
+    unsigned int hasack=0;
 
      qDebug()<<"ask timeout!";
       QString str;
@@ -186,11 +276,61 @@ void Widget::ask_timeout()
               band=str.mid(1,1);
               qDebug()<<band;
           }
+
+          hasack=1;
      }
 
 
      update4gs(online,csq,cops,band);
      update();
+
+     if(hastabled==FALSE)
+     {
+         p1->start("udhcpc -i eth0");
+         p2->start("udhcpc -i eth1");
+       //  system("udhcpc -i eth0");
+      //   system("udhcpc -i eth1");
+
+         if(islanworking())
+         {
+            getip();
+            qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<isworking;
+
+            if(hasack==1)
+            {
+                if(online==1)
+                {//4g
+                    if(m_4gip!="")
+                    {
+                        iptable(m_4gip);
+                        hastabled=TRUE;
+                        ui->label_3->setText("Internet:use 4G");
+                        qDebug()<<"<<<<<<<<<4G router>>>>>>>>";
+                    }
+                }
+                else
+                {//lan
+                    if(m_lanip!="")
+                    {
+                        hastabled=TRUE;
+                        iptable(m_lanip);
+                        ui->label_3->setText("Internet:use Lan");
+                        qDebug()<<"<<<<<<<<<LAN router>>>>>>>>";
+                    }
+                }
+            }
+            else
+            {
+                if(m_lanip!="")
+                {
+                    hastabled=TRUE;
+                    iptable(m_lanip);
+                    ui->label_3->setText("Internet:use Lan");
+
+                }
+            }
+        }
+     }
 
 }
 

@@ -64,6 +64,11 @@ function build_demos()
 	pwd
 	make clean
 
+	cd $APP_DIR/demo-guid
+	echo "*****************************************"
+	pwd
+	make clean
+	
 	cd $APP_DIR/opencv
 	echo "*****************************************"
 	pwd
@@ -113,12 +118,6 @@ function build_demos()
 	echo "*****************************************"
 	pwd
 	rm build -rf
-
-	cd $APP_DIR/mjpg_srv
-	echo "*****************************************"
-	pwd
-	make clean
-
 }
 
 function clean_demos()

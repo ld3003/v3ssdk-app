@@ -4,8 +4,11 @@
 #include <QImage>
 #include <QPixmap>
 #include <QTextFormat>
-
-
+#include <QKeyEvent>
+#define KEY1 16777220
+#define KEY2 0
+#define KEY3 16777328
+#define KEY4 16777330
 MainWindow *mw;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -71,4 +74,12 @@ void MainWindow::tipmsgTimeout()
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key()==KEY3)
+    {
+        exit(0);
+    }
 }
