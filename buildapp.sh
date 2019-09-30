@@ -150,6 +150,12 @@ function build_demos()
 	pwd
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
 
+	cd $APP_DIR/
+	cp demo-guid/demo-guid ./sdcard/
+	cp demo-router/demo-router ./sdcard/
+	cp demo-mjpgsrv/demo-mjpgsrv ./sdcard/
+	cp facedetapp/facenet ./sdcard/
+
 
 }
 
