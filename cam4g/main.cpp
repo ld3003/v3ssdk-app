@@ -52,6 +52,7 @@
 #include "network.h"
 #include "common.h"
 #include <curl/curl.h>
+#include <gpio.h>
 
 pthread_t write_tid; /**< write thread */
 pthread_t read_tid;  /**< read thread */
@@ -63,7 +64,9 @@ int vol = 0;
 int csq = 0;
 float jd = 0;
 float wd = 0;
-
+char longitude[32];
+char latitude[32];
+char imei[32];
 
 /** The data we write to the port. */
 //char *buf = "Are you going to die?\r\n";
@@ -104,15 +107,15 @@ static void process_recv_serialport(int fd)
             snprintf(tmp, sizeof(tmp), "ERROR NOPIC\r\n");
             write(fd, tmp, strlen(tmp));
         }
-    }else
-    if (strstr(tmp, "AT+GETURL"))
+    }
+    else if (strstr(tmp, "AT+GETURL"))
     {
-	    extern char geturl[];
-            extern char reqbuffer[512];
+        extern char geturl[];
+        extern char reqbuffer[512];
 
-	    snprintf(tmp, sizeof(tmp), "OK=%s\r\n",reqbuffer);
-	    write(fd, tmp, strlen(tmp));
-	    printf("GETURL ############################ %s \n",tmp);
+        snprintf(tmp, sizeof(tmp), "OK=%s\r\n", reqbuffer);
+        write(fd, tmp, strlen(tmp));
+        printf("GETURL ############################ %s \n", tmp);
     }
     else if (strstr(tmp, "AT+PUSHPIC"))
     {
@@ -122,40 +125,41 @@ static void process_recv_serialport(int fd)
         char *revbuf[128] = {0};
         char *p;
 
-        for(int i=0;i<strlen(buf);i++)
+        for (int i = 0; i < strlen(buf); i++)
         {
-                if (buf[i] == '=')
-                        buf[i] = ',';
-                if (buf[i] == '\r')
-                        buf[i] = ',';
+            if (buf[i] == '=')
+                buf[i] = ',';
+            if (buf[i] == '\r')
+                buf[i] = ',';
         }
 
         //分割后子字符串的个数
         int num = 0;
 
-        split(buf,",",revbuf,&num);
+        split(buf, ",", revbuf, &num);
         for (int i = 0; i < num; i++)
         {
-                printf("[%s]\n", revbuf[i]);
+            printf("[%s]\n", revbuf[i]);
         }
 
-	if (num >= 4)
-	{
-		sscanf(revbuf[1],"%d",&vol);
-		sscanf(revbuf[2],"%d",&csq);
-		sscanf(revbuf[3],"%f",&jd);
-		sscanf(revbuf[4],"%f",&wd);
+        if (num >= 4)
+        {
+            sscanf(revbuf[1], "%d", &vol);
+            sscanf(revbuf[2], "%d", &csq);
+            sscanf(revbuf[3], "%f", &jd);
+            sscanf(revbuf[4], "%f", &wd);
 
+            snprintf(longitude, sizeof(longitude), "%s", revbuf[3]);
+            snprintf(latitude, sizeof(latitude), "%s", revbuf[4]);
+            snprintf(imei, sizeof(imei), "%s", revbuf[5]);
 
-		printf("!!!!!!!! %d %d %f %f \n",vol,csq,jd,wd);
+            printf("!!!!!!!! %d %d %f %f IMEI %s \n", vol, csq, jd, wd, imei);
+        }
 
-	}
-
-
-	int ret = pushpic();
-	if (ret == 0)
-	{
-		if (next_request_time < 30758400)
+        int ret = pushpic();
+        if (ret == 0)
+        {
+            if (next_request_time < 30758400)
                 snprintf(tmp, sizeof(tmp), "OK=%d\r\n", next_request_time);
             else
 
@@ -233,7 +237,13 @@ void *read_port_thread(void *argc)
     {
         while ((num = read(fd, tmp, 512)) > 0)
         {
+
+            printf("wait:\n");
+            usleep(1000 * 100);
+            int num2 = read(fd, tmp + num, 512);
+            num += num2;
             debug_msg("read num: %d\n", num);
+
             tmp[num + 1] = '\0';
             printf("[%s]\n", tmp);
             process_recv_serialport(fd);
@@ -304,7 +314,7 @@ void *exit_thread(void *argc)
  * 
  */
 
-#define RUN_TEST printf("RUN_TEST #################33 %s : %d \n",__FILE__,__LINE__);
+#define RUN_TEST printf("RUN_TEST #################33 %s : %d \n", __FILE__, __LINE__);
 
 int main(int argc, char *argv[])
 {
@@ -314,9 +324,20 @@ int main(int argc, char *argv[])
 
     char tb[128];
 
+    //void GPIO_Init(void);
+    //void GPIO_ConfigPin(PORT port, unsigned int pin, PIN_MODE mode);
+ 
+    GPIO_Init();
+    GPIO_ConfigPin(PE, 17, OUT);
+	GPIO_SetPin(PE, 17, 0);
+
     RUN_TEST;
 
     opencam();
+
+    //getpic();
+
+    //for(;;){sleep(1);};
 
     RUN_TEST;
     strcpy(dev_name, "/dev/ttyS2");
@@ -367,10 +388,10 @@ int main(int argc, char *argv[])
     //pthread_join(read_tid, NULL);
     //pthread_join(exit_tid, NULL);
     //
-    for(;;){
-	    sleep(1);
+    for (;;)
+    {
+        sleep(1);
     }
-
 
     return 0;
 }

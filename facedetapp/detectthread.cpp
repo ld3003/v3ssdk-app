@@ -11,7 +11,7 @@
 #include <curl/curl.h>
 #include "faceregrequest.h"
 #include <QThreadPool>
-
+#include "mobilefacenet.h"
 #include "Communiction.h"
 #include "Common.h"
 

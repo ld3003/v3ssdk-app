@@ -23,7 +23,7 @@ ARFLAGS = cr
 RM = -rm -rf
 MAKE = make
 
-CFLAGS = -Wall
+CFLAGS = -Wall -fpermissive
 #debug = y
 
 ifeq ($(debug), y)
