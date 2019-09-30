@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/pic">
+        <file>images/back.jpg</file>
+        <file>images/camera.jpg</file>
+        <file>images/face.jpg</file>
+        <file>images/sml.jpg</file>
+        <file>images/trans.jpg</file>
+        <file>images/smlxz.jpg</file>
+        <file>images/facexz.jpg</file>
+        <file>images/transxz.jpg</file>
+        <file>images/cameraxz.jpg</file>
+        <file>images/back.png</file>
+    </qresource>
+</RCC>

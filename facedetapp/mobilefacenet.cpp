@@ -3,12 +3,13 @@ created by L. 2018.05.16
 */
 
 #include "mobilefacenet.h"
-
+#include <QDebug>
 
 
 Recognize::Recognize(const std::string &model_path) {
     std::string param_files = model_path + "/mobilefacenet.param";
     std::string bin_files = model_path + "/mobilefacenet.bin";
+    qDebug()<<param_files.c_str()<<bin_files.c_str();
     Recognet.load_param(param_files.c_str());
     Recognet.load_model(bin_files.c_str());
 }
@@ -32,7 +33,9 @@ void Recognize::RecogNet(ncnn::Mat& img_) {
 }
 
 void Recognize::start(const cv::Mat& img, std::vector<float>&feature) {
+    qDebug()<<"1111";
     ncnn::Mat ncnn_img = ncnn::Mat::from_pixels_resize(img.data, ncnn::Mat::PIXEL_BGR2RGB, img.cols, img.rows, 112, 112);
+    qDebug()<<"2222";
     RecogNet(ncnn_img);
     feature = feature_out;
 }
@@ -47,5 +50,19 @@ double calculSimilar(std::vector<float>& v1, std::vector<float>& v2)
         mod1 += v1[i] * v1[i];
         mod2 += v2[i] * v2[i];
     }
+
+    //return (ret / sqrt(mod1) / sqrt(mod2) );
     return (ret / sqrt(mod1) / sqrt(mod2) + 1) / 2.0;
+}
+double euclidean_distance(std::vector<float>& v1, std::vector<float>& v2)
+{
+    double sumDescriptor = 0;
+    for (std::vector<double>::size_type i = 0; i != v1.size(); ++i)
+    {
+        double numbase=(v1[i]);
+        double numtarget=(v2[i]);
+        sumDescriptor+=pow(abs(numbase-numtarget),2);
+    }
+    double simility=sqrt(sumDescriptor);
+    return 1/(1+simility);
 }

@@ -10,10 +10,10 @@
 
 #include "camthread.h"
 #include "detectthread.h"
-
+#include "comparethread.h"
 #include <QLabel>
 #include <QTimer>
-
+#include <QKeyEvent>
 using namespace std;
 
 namespace Ui {
@@ -28,6 +28,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void detectFace();
     cv::Mat QImageToMat(QImage image);
+    static cv::Mat screenshort;
+    static cv::Mat realshort;
+    static std::vector<float> feature1;
+    static int sampneedinit;
+    static int needcmp;
     ~MainWindow();
 public slots:
     void imgFlush(QImage img);
@@ -35,14 +40,18 @@ public slots:
     void tipmsgTimeout();
     void syschecktimeout();
     void openDoor();
-
+    void keyPressEvent(QKeyEvent *event);
 private:
     Ui::MainWindow *ui;
     CamThread *camThread;
     DetectThread *detThread;
+    CompareThread* cmpThread;
 
     QLabel *topBar;
     QLabel *tipLable;
+    QLabel *screenshortLable;
+    QLabel *resultLable;
+    QLabel *more;
     QTimer *tipMsgtimer;
     QTimer *syschecktimer;
 

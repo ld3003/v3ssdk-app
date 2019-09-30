@@ -14,7 +14,7 @@
 #include "mobilefacenet.h"
 #include "Communiction.h"
 #include "Common.h"
-
+#include "mainwindow.h"
 using namespace std;
 using namespace cv;
 
@@ -64,7 +64,11 @@ void DetectThread::run()
         cv::Mat image_roi;
 
         if (image1.empty())
+        {
+
             continue;
+        }
+
 
 #ifdef USE_MTCNN
 
@@ -91,8 +95,19 @@ void DetectThread::run()
             Rect rect(x, y, w, h);
             image_roi = image1(rect);
             //image_roi = image1;
-
-
+            if (image_roi.empty())
+                ;
+            else
+            {
+               // MainWindow::screenshort=image_roi;
+                MainWindow::realshort=image_roi;
+                MainWindow::needcmp=1;
+                qDebug()<<"i have get a picture!";
+            }
+ //           if(MainWindow::screenshort.empty())
+//                qDebug()<<"there is no picture to compare!";
+//            else
+//                qDebug()<<"there is one picture to compare!";
 
             if (tp.activeThreadCount() < 1 )
             {
