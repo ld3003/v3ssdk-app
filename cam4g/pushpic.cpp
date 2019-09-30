@@ -55,20 +55,16 @@ size_t write_data(void *buff, size_t size, size_t nmemb, FILE *fp)
 {
 	//回调函数，下载的数据通过这里写入本地文件
 	//fwrite(buff, size, nmemb, fp);
-	snprintf(reqbuffer,sizeof(reqbuffer),"%s",buff,nmemb);
+	snprintf(reqbuffer, sizeof(reqbuffer), "%s", buff, nmemb);
 	return size * nmemb;
 }
 
-#define REQURL "http://demo.zxhtong.com/camera_upload.html"
-
+#define REQURL "http://photo.zxhtong.com/camera_upload.html"
 
 extern int vol;
 extern int csq;
 extern float jd;
 extern float wd;
-
-
-
 
 int pushpic()
 {
@@ -81,8 +77,6 @@ int pushpic()
 	char tmpstr[32];
 	char tmpstr2[32];
 
-
-
 	next_request_time = 30758400;
 
 	struct curl_slist *headerlist = NULL;
@@ -90,20 +84,32 @@ int pushpic()
 	struct curl_httppost *post = NULL;
 	struct curl_httppost *last = NULL;
 
+	extern char imei[32];
+	extern char longitude[32];
+	extern char latitude[32];
+
 	get_mac(mac, sizeof(mac), &devid, "eth0");
 
-	snprintf(tmpstr,sizeof(tmpstr),"%d",vol);
+	snprintf(tmpstr, sizeof(tmpstr), "%d", vol);
 	curl_formadd(&post, &last, CURLFORM_COPYNAME, "BATVOL",
 				 CURLFORM_COPYCONTENTS, tmpstr,
 				 CURLFORM_END);
 
-	snprintf(tmpstr2,sizeof(tmpstr2),"%d",csq);
+	snprintf(tmpstr2, sizeof(tmpstr2), "%d", csq);
 	curl_formadd(&post, &last, CURLFORM_COPYNAME, "SIG",
 				 CURLFORM_COPYCONTENTS, tmpstr2,
 				 CURLFORM_END);
 
-	curl_formadd(&post, &last, CURLFORM_COPYNAME, "DEVID",
-				 CURLFORM_COPYCONTENTS, mac,
+	curl_formadd(&post, &last, CURLFORM_COPYNAME, "IMEI",
+				 CURLFORM_COPYCONTENTS, imei,
+				 CURLFORM_END);
+
+	curl_formadd(&post, &last, CURLFORM_COPYNAME, "LAT",
+				 CURLFORM_COPYCONTENTS, latitude,
+				 CURLFORM_END);
+
+	curl_formadd(&post, &last, CURLFORM_COPYNAME, "LON",
+				 CURLFORM_COPYCONTENTS, longitude,
 				 CURLFORM_END);
 
 	curl_formadd(&post, &last, CURLFORM_COPYNAME, "file", //此处表示要传的参数名
@@ -156,7 +162,6 @@ int pushpic()
 								next_request_time = pSub->valueint;
 								printf("CODE:%d\n", pSub->valueint);
 							}
-
 
 							//geturl
 
