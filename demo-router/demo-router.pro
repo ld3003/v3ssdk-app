@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = demo-router
@@ -15,12 +16,14 @@ SOURCES += main.cpp\
         widget.cpp \
     serialport.cpp \
     serialreadthread.cpp \
-    error-log.cpp
+    error-log.cpp \
+    net_detect.cpp
 
 HEADERS  += widget.h \
     serialport.h \
     serialreadthread.h \
-    error-log.h
+    error-log.h \
+    net_detect.h
 
 FORMS    += widget.ui
 

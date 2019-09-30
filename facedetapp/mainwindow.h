@@ -34,6 +34,7 @@ public:
     static int sampneedinit;
     static int needcmp;
     ~MainWindow();
+
 public slots:
     void imgFlush(QImage img);
     void tipmsg(QString);

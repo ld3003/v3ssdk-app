@@ -29,6 +29,7 @@ public:
     void detectFace();
     cv::Mat QImageToMat(QImage image);
     ~MainWindow();
+     void keyPressEvent(QKeyEvent *event);
 public slots:
     void imgFlush(QImage img);
     void tipmsg(QString);

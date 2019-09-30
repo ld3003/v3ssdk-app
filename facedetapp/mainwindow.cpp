@@ -15,7 +15,10 @@ cv::Mat MainWindow::realshort=cv::imread("noway.jpg", CV_LOAD_IMAGE_COLOR);
 int MainWindow::sampneedinit=0;
 int MainWindow::needcmp=0;
 MainWindow *mw;
-
+#define KEY1 16777220
+#define KEY2 0
+#define KEY3 16777328
+#define KEY4 16777330
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -36,14 +39,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     camThread = new CamThread(0);
     detThread = new DetectThread(camThread);
-    cmpThread = new CompareThread(0);
+    //cmpThread = new CompareThread(0);
 
     connect(camThread,SIGNAL(imgReady(QImage)),this,SLOT(imgFlush(QImage)));
     connect(detThread,SIGNAL(tipmsg(QString)),this,SLOT(tipmsg(QString)));
 
     camThread->start();
     detThread->start();
-    cmpThread->start();
+   // cmpThread->start();
     topBar = new QLabel(this);
     topBar->setGeometry(0,0,DEV_WINDOWS_W,50);
 
@@ -176,6 +179,9 @@ void MainWindow::openDoor()
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     qDebug()<<event->key();
+
+    if(event->key()==KEY3)
+        exit(0);
 
     if(!MainWindow::realshort.empty())
     {

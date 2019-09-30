@@ -6,6 +6,12 @@
 #include <QLabel>
 #include <QPalette>
 #include <QTextEdit>
+#include <QKeyEvent>
+#include <QProcess>
+#define KEY1 16777220
+#define KEY2 0
+#define KEY3 16777328
+#define KEY4 16777330
 Widget* myW;
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -16,12 +22,20 @@ Widget::Widget(QWidget *parent) :
     myW=this;
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->setWindowOpacity(0.7);
+//
+   // QProcess *process = new QProcess(); process->start("sh /root/sdcard/hostap.sh");
+
+  //  QProcess *process1 = new QProcess(); process->start("udhcpc -i eth0");
+
+    system("sh /root/hostap.sh");
+
+    system("udhcpc -i eth0");
 
     foreach(const QHostAddress& hostAddress,QNetworkInterface::allAddresses())
-            if ( hostAddress != QHostAddress::LocalHost && hostAddress.toIPv4Address() )
-            {
-                ui->textEdit->append(hostAddress.toString());
-            }
+    if ( hostAddress != QHostAddress::LocalHost && hostAddress.toIPv4Address() )
+    {
+        ui->textEdit->append(hostAddress.toString());
+    }
 
     QFont ft;
     ft.setPointSize(14);
@@ -62,6 +76,14 @@ Widget::Widget(QWidget *parent) :
 Widget::~Widget()
 {
     delete ui;
+}
+
+void Widget::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key()==KEY3)
+    {
+        exit(0);
+    }
 }
 
 void Widget::updateclientcnt(QString str)

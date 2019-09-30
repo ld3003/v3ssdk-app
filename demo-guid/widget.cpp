@@ -66,6 +66,10 @@ void Widget::keyPressEvent(QKeyEvent *event)
             system("./qrcode -qws");
         else if(key_index==0)
             system("./facenet -qws");
+        else if(key_index==2)
+            system("./demo-router -qws");
+        else if(key_index==3)
+            system("./demo-mjpgsrv -qws");
     }
     update();
 

@@ -163,14 +163,21 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>ssid:Yisuwangluo</string>
+             <string>ssid:V3S-ESP8089</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>password:Yisuwangluo</string>
+             <string>password:88888888</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
