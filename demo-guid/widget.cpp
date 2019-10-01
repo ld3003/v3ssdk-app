@@ -63,13 +63,13 @@ void Widget::keyPressEvent(QKeyEvent *event)
     if(event->key()==KEY4)
     {
         if(key_index==1)
-            system("./qrcode -qws");
+            system("/root/sdcard/./qrcode -qws");
         else if(key_index==0)
-            system("./facenet -qws");
+            system("/root/sdcard/./facenet -qws");
         else if(key_index==2)
-            system("./demo-router -qws");
+            system("/root/sdcard/./demo-router -qws");
         else if(key_index==3)
-            system("./demo-mjpgsrv -qws");
+            system("/root/sdcard/./demo-mjpgsrv -qws");
     }
     update();
 
