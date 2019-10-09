@@ -15,6 +15,7 @@
 #include "Communiction.h"
 #include "Common.h"
 #include "mainwindow.h"
+#include <QDebug>
 using namespace std;
 using namespace cv;
 
@@ -72,13 +73,17 @@ void DetectThread::run()
 
 #ifdef USE_MTCNN
 
+
         cv::resize(image1, image3, cv::Size(image1.cols/RESET_VAL, image1.rows/RESET_VAL),0,0);
+
         ncnn::Mat ncnn_img = ncnn::Mat::from_pixels(image3.data, ncnn::Mat::PIXEL_BGR2RGB, image3.cols, image3.rows);
 
         struct timeval gTpstart ,gTpend;
         //time_consuming_start(&gTpstart,&gTpend);
+         qDebug()<<"44444";
         mtcnn->detectMaxFace(ncnn_img, finalBbox);
         //time_consuming_print("detect time",&gTpstart,&gTpend);
+         qDebug()<<"55555";
         if (finalBbox.size() == 1)
         {
 

@@ -189,7 +189,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         imwrite("sample.jpg", MainWindow::realshort);
 
         QImage pic;
-        pic.load("/root/sample.jpg");
+        pic.load("sample.jpg");
         screenshortLable->setPixmap(QPixmap::fromImage(pic.scaled(screenshortLable->size())));
 
         sampneedinit=1;

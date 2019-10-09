@@ -43,18 +43,27 @@ Widget::Widget(QWidget *parent) :
     ui->label_3->setFont(ft);
 
 
+
+
+
+
+
+
+
+    system("./usb-set-hostmode.sh");
+    qDebug()<<"***************************************** run 4g";
+
+
+    system("./hostap.sh");
+
+    qDebug()<<"***************************************** run wifi";
+    delay(5000);
+
+    system("udhcpc -i eth0 &");
+    system("udhcpc -i eth1 &");
+
+    delay(5000);
     getip();
-
-
-
-    system("sh /root/sdcard/hostap.sh");
-
-
-
-    system("sh /root/usb-set-hostmode.sh");
-
-    delay(2000);
-
 
 
 
@@ -63,10 +72,10 @@ Widget::Widget(QWidget *parent) :
 
 
     hastabled=FALSE;
-    p1=new QProcess();
-    p2=new QProcess();
+  //  p1=new QProcess();
+  // p2=new QProcess();
 
-     configserial();
+    configserial();
 
 
 }
@@ -286,15 +295,14 @@ void Widget::ask_timeout()
 
      if(hastabled==FALSE)
      {
-         p1->start("udhcpc -i eth0");
-         p2->start("udhcpc -i eth1");
-       //  system("udhcpc -i eth0");
-      //   system("udhcpc -i eth1");
+         //p1->start("udhcpc -i eth0");
+        // p2->start("udhcpc -i eth1");
+
 
          if(islanworking())
          {
             getip();
-            qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<isworking;
+            qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<islanworking();
 
             if(hasack==1)
             {

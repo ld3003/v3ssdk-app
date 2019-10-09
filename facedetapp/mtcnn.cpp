@@ -9,7 +9,7 @@
 #include "mtcnn.h"
 
 #define RUN_TEST printf("RUN_TEST %s %d \n",__FILE__,__LINE__);
-
+#include <QDebug>
 bool cmpScore(Bbox lsh, Bbox rsh) {
     if (lsh.score < rsh.score)
         return true;
@@ -288,22 +288,28 @@ void MTCNN::RNet(){
     int count = 0;
     for(vector<Bbox>::iterator it=firstBbox_.begin(); it!=firstBbox_.end();it++){
         ncnn::Mat tempIm;
+        qDebug()<<__FILE__<<__LINE__;
         copy_cut_border(img, tempIm, (*it).y1, img_h-(*it).y2, (*it).x1, img_w-(*it).x2);
         ncnn::Mat in;
+        qDebug()<<__FILE__<<__LINE__;
         resize_bilinear(tempIm, in, 24, 24);
         ncnn::Extractor ex = Rnet.create_extractor();
         //ex.set_num_threads(2);
+        qDebug()<<__FILE__<<__LINE__;
         ex.set_light_mode(true);
         ex.input("data", in);
         ncnn::Mat score, bbox;
         ex.extract("prob1", score);
         ex.extract("conv5-2", bbox);
+        qDebug()<<__FILE__<<__LINE__;
         if ((float)score[1] > threshold[1]) {
             for (int channel = 0; channel<4; channel++) {
                 it->regreCoord[channel] = (float)bbox[channel];//*(bbox.data+channel*bbox.cstep);
             }
+            qDebug()<<__FILE__<<__LINE__;
             it->area = (it->x2 - it->x1)*(it->y2 - it->y1);
             it->score = score.channel(1)[0];//*(score.data+score.cstep);
+            qDebug()<<__FILE__<<__LINE__;
             secondBbox_.push_back(*it);
         }
     }
@@ -377,7 +383,8 @@ void MTCNN::detectMaxFace(ncnn::Mat& img_, std::vector<Bbox>& finalBbox) {
     secondBbox_.clear();
     thirdBbox_.clear();
 
-    
+    qDebug()<<__FILE__<<__LINE__;
+
     //norm
     img = img_;
     img_w = img.w;
@@ -395,6 +402,7 @@ void MTCNN::detectMaxFace(ncnn::Mat& img_, std::vector<Bbox>& finalBbox) {
         minl *= factor;
         m = m*factor;
     }
+    qDebug()<<__FILE__<<__LINE__;
     sort(scales_.begin(), scales_.end());
     //printf("scales_.size()=%d\n", scales_.size());
     
@@ -403,31 +411,34 @@ void MTCNN::detectMaxFace(ncnn::Mat& img_, std::vector<Bbox>& finalBbox) {
     {
         //first stage
         //printf("@@@@@@@@@@@@@@@@@@@@@@@ i %d\n",i);
-	
+        qDebug()<<__FILE__<<__LINE__;
         PNet(scales_[i]);
-	
+        qDebug()<<__FILE__<<__LINE__;
         nms(firstBbox_, nms_threshold[0]);
-	
+     qDebug()<<__FILE__<<__LINE__;
         nmsTwoBoxs(firstBbox_, firstPreviousBbox_, nms_threshold[0]);
         if (firstBbox_.size() < 1) {
             firstBbox_.clear();
             continue;
         }
+         qDebug()<<__FILE__<<__LINE__;
         firstPreviousBbox_.insert(firstPreviousBbox_.end(), firstBbox_.begin(), firstBbox_.end());
+         qDebug()<<__FILE__<<__LINE__;
         refine(firstBbox_, img_h, img_w, true);
+         qDebug()<<__FILE__<<__LINE__;
         //printf("firstBbox_.size()=%d\n", firstBbox_.size());
-
+qDebug()<<__FILE__<<__LINE__;
         //second stage
         RNet();
-	
+         qDebug()<<__FILE__<<__LINE__;
         nms(secondBbox_, nms_threshold[1]);
-	
+     qDebug()<<__FILE__<<__LINE__;
 
         nmsTwoBoxs(secondBbox_, secondPreviousBbox_, nms_threshold[0]);
-	
+     qDebug()<<__FILE__<<__LINE__;
 
         secondPreviousBbox_.insert(secondPreviousBbox_.end(), secondBbox_.begin(), secondBbox_.end());
-	
+     qDebug()<<__FILE__<<__LINE__;
         if (secondBbox_.size() < 1) {
 		
             firstBbox_.clear();
@@ -439,9 +450,10 @@ void MTCNN::detectMaxFace(ncnn::Mat& img_, std::vector<Bbox>& finalBbox) {
 	
         refine(secondBbox_, img_h, img_w, true);
         //printf("secondBbox_.size()=%d\n", secondBbox_.size());
-
+ qDebug()<<__FILE__<<__LINE__;
         //third stage
         ONet();
+         qDebug()<<__FILE__<<__LINE__;
         //printf("thirdBbox_.size()=%d\n", thirdBbox_.size());
         if (thirdBbox_.size() < 1) {
             firstBbox_.clear();

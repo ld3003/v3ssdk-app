@@ -20,6 +20,7 @@ CompareThread::CompareThread(QObject *obj)
 */
 void CompareThread::run()
 {
+    /*
     for(;;)
     {//计算实时特征值，对比历史特征值
 
@@ -73,4 +74,5 @@ void CompareThread::run()
         }
 
     }
+    */
 }

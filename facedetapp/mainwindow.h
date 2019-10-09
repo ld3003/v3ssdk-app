@@ -46,7 +46,7 @@ private:
     Ui::MainWindow *ui;
     CamThread *camThread;
     DetectThread *detThread;
-    CompareThread* cmpThread;
+   // CompareThread* cmpThread;
 
     QLabel *topBar;
     QLabel *tipLable;

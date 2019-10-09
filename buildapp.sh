@@ -175,7 +175,3 @@ function clean_demos()
 
 build_library
 build_demos
-
-
-
-
