@@ -19,7 +19,7 @@ echo "HT Number : ${HTNumber}"
 echo "*****************************"
 
 
-TOP_DIR=`dirname $0`
+TOP_DIR=$PWD
 
 echo $TOP_DIR
 echo $PATH
@@ -141,7 +141,10 @@ function build_demos()
 	echo "*****************************************"
 	pwd
 	mkdir build
+	echo "####################################"
+	ls
 	cd build
+	pwd
 	cmake ../
 	make -j${logicalNumber}
 
@@ -151,10 +154,10 @@ function build_demos()
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
 
 	cd $APP_DIR/
-	cp demo-guid/demo-guid ./sdcard/
-	cp demo-router/demo-router ./sdcard/
-	cp demo-mjpgsrv/demo-mjpgsrv ./sdcard/
-	cp facedetapp/facenet ./sdcard/
+	cp -v demo-guid/demo-guid ./sdcard/
+	cp -v demo-router/demo-router ./sdcard/
+	cp -v demo-mjpgsrv/demo-mjpgsrv ./sdcard/
+	cp -v facedetapp/facenet ./sdcard/
 
 
 }

@@ -19,7 +19,7 @@ echo "HT Number : ${HTNumber}"
 echo "*****************************"
 
 
-TOP_DIR=`dirname $0`
+TOP_DIR=$PWD
 
 echo $TOP_DIR
 echo $PATH
