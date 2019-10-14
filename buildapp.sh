@@ -18,6 +18,16 @@ echo "HT Number : ${HTNumber}"
 
 echo "*****************************"
 
+if [ -L $0 ]
+then
+	BASE_DIR=`dirname $(readlink $0)`
+else
+	BASE_DIR=`dirname $0`
+fi
+basepath=$(cd $BASE_DIR; pwd)
+echo $basepath
+
+cd $basepath
 
 TOP_DIR=$PWD
 
