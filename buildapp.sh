@@ -18,6 +18,10 @@ echo "HT Number : ${HTNumber}"
 
 echo "*****************************"
 
+#设置出错就暂停
+set -e
+
+#获取当前文件所在路径
 if [ -L $0 ]
 then
 	BASE_DIR=`dirname $(readlink $0)`
@@ -27,6 +31,7 @@ fi
 basepath=$(cd $BASE_DIR; pwd)
 echo $basepath
 
+#进入当前文件所在目录
 cd $basepath
 
 TOP_DIR=$PWD
@@ -44,13 +49,17 @@ function build_library()
 {
 
 	cd $APP_DIR/ncnn/
-	mkdir build
+	if [ ! -d "build" ]; then
+		mkdir build
+	fi
 	cd build
 	cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-buildroot-gnueabihf.toolchain.cmake ..
 	make -j${logicalNumber}
 
 	cd $APP_DIR/libfacedetection/
-	mkdir build
+	if [ ! -d "build" ]; then
+		mkdir build
+	fi
 	cd build
 	cmake ../
 	make -j${logicalNumber}
@@ -123,7 +132,7 @@ function build_demos()
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
 
 
-	cd $APP_DIR/facedetectapp
+	cd $APP_DIR/facedetapp
 	echo "*****************************************"
 	pwd
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
@@ -150,7 +159,9 @@ function build_demos()
 	cd $APP_DIR/facenet/
 	echo "*****************************************"
 	pwd
-	mkdir build
+	if [ ! -d "build" ]; then
+		mkdir build
+	fi
 	echo "####################################"
 	ls
 	cd build
