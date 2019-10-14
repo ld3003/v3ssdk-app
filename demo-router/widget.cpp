@@ -59,7 +59,7 @@ Widget::Widget(QWidget *parent) :
     qDebug()<<"***************************************** run wifi";
     delay(5000);
 
-    system("udhcpc -i eth0 &");
+    //system("udhcpc -i eth0 &");
     system("udhcpc -i eth1 &");
 
     delay(5000);

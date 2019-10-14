@@ -53,6 +53,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
     qDebug()<<key_index;
 
     setlabeltext(key_index);
+
     /*
     if(key_index%2==0)
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
@@ -63,13 +64,13 @@ void Widget::keyPressEvent(QKeyEvent *event)
     if(event->key()==KEY4)
     {
         if(key_index==1)
-            system("/root/sdcard/./qrcode -qws");
+            system("/root/bin/demo-qrcode -qws");
         else if(key_index==0)
-            system("/root/sdcard/./facenet -qws");
+            system("/root/bin/demo-facenet -qws");
         else if(key_index==2)
-            system("/root/sdcard/./demo-router -qws");
+            system("/root/bin/demo-router -qws");
         else if(key_index==3)
-            system("/root/sdcard/./demo-mjpgsrv -qws");
+            system("/root/bin/demo-mjpgsrv -qws");
     }
     update();
 

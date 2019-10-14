@@ -29,7 +29,7 @@ Widget::Widget(QWidget *parent) :
 
     system("sh /root/hostap.sh");
 
-    system("udhcpc -i eth0");
+  //  system("udhcpc -i eth0");
 
     foreach(const QHostAddress& hostAddress,QNetworkInterface::allAddresses())
     if ( hostAddress != QHostAddress::LocalHost && hostAddress.toIPv4Address() )
