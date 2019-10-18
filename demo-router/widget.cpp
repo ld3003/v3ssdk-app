@@ -50,11 +50,11 @@ Widget::Widget(QWidget *parent) :
 
 
 
-    system("./usb-set-hostmode.sh");
+    system("/root/bin/usb-set-hostmode.sh");
     qDebug()<<"***************************************** run 4g";
 
 
-    system("./hostap.sh");
+    system("/root/bin/hostap.sh");
 
     qDebug()<<"***************************************** run wifi";
     delay(5000);

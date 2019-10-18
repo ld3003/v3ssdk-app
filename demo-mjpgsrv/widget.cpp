@@ -27,7 +27,7 @@ Widget::Widget(QWidget *parent) :
 
   //  QProcess *process1 = new QProcess(); process->start("udhcpc -i eth0");
 
-    system("sh /root/hostap.sh");
+    system("sh /root/bin/hostap.sh");
 
   //  system("udhcpc -i eth0");
 
