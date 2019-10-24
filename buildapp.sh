@@ -103,6 +103,18 @@ function build_demos()
 	pwd
 	qmake
 	make -j${logicalNumber}
+
+	cd $APP_DIR/demo-mjpgcloud
+	echo "*****************************************"
+	pwd
+	qmake
+	make -j${logicalNumber}
+
+	cd $APP_DIR/demo-eth
+	echo "*****************************************"
+	pwd
+	qmake
+	make -j${logicalNumber}
 	
 	cd $APP_DIR/demo-router
 	echo "*****************************************"
@@ -180,6 +192,8 @@ function build_demos()
 	cp -v demo-mjpgsrv/demo-mjpgsrv ./sdcard/
 	cp -v facedetapp/facenet ./sdcard/demo-facenet
 	cp -v qrcode/qrcode ./sdcard/demo-qrcode
+	cp -v demo-mjpgcloud/cloud.cfg ./sdcard/cloud.cfg
+	cp -v demo-eth/demo-eth ./sdcard/
 
 
 }
