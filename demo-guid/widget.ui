@@ -34,26 +34,20 @@
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
-     <property name="spacing">
-      <number>10</number>
-     </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="spacing">
-        <number>10</number>
-       </property>
        <item>
         <widget class="QPushButton" name="pushButton">
          <property name="minimumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="autoFillBackground">
@@ -74,14 +68,14 @@
         <widget class="QPushButton" name="pushButton_2">
          <property name="minimumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="autoFillBackground">
@@ -102,21 +96,18 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="spacing">
-        <number>10</number>
-       </property>
        <item>
         <widget class="QPushButton" name="pushButton_3">
          <property name="minimumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -134,14 +125,14 @@
         <widget class="QPushButton" name="pushButton_4">
          <property name="minimumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>80</width>
+           <height>80</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -152,6 +143,48 @@
          </property>
          <property name="flat">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
          </property>
         </widget>
        </item>

@@ -48,7 +48,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
     if(event->key()==KEY1)
     {
         key_index++;
-        key_index%=4;
+        key_index%=6;
     }
     qDebug()<<key_index;
 
@@ -71,6 +71,11 @@ void Widget::keyPressEvent(QKeyEvent *event)
             system("/root/bin/demo-router -qws");
         else if(key_index==3)
             system("/root/bin/demo-mjpgsrv -qws");
+        else if(key_index==4)
+            system("/root/bin/demo-cloud -qws");
+        else if(key_index==5)
+            system("/root/bin/demo-eth -qws");
+
     }
     update();
 
@@ -81,12 +86,14 @@ void Widget::setlabeltext(unsigned int index)
     QString str="";
     switch(index)
     {
-        case 0:
+    case 0:
         str="face recognition";
         ui->pushButton->setStyleSheet("border-image: url(:/pic/images/facexz.jpg);");
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
         ui->pushButton_4->setStyleSheet("border-image: url(:/pic/images/camera.jpg);");
+        ui->pushButton_5->setStyleSheet("border-image: url(:/pic/images/cloud.jpg);");
+        ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
         break;
     case 1:
         str="Sweep code";
@@ -94,6 +101,8 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/smlxz.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
         ui->pushButton_4->setStyleSheet("border-image: url(:/pic/images/camera.jpg);");
+        ui->pushButton_5->setStyleSheet("border-image: url(:/pic/images/cloud.jpg);");
+        ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
         break;
     case 2:
         str="transmission";
@@ -101,6 +110,8 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/transxz.jpg);");
         ui->pushButton_4->setStyleSheet("border-image: url(:/pic/images/camera.jpg);");
+        ui->pushButton_5->setStyleSheet("border-image: url(:/pic/images/cloud.jpg);");
+        ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
         break;
     case 3:
         str="Camera";
@@ -108,6 +119,26 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
         ui->pushButton_4->setStyleSheet("border-image: url(:/pic/images/cameraxz.jpg);");
+        ui->pushButton_5->setStyleSheet("border-image: url(:/pic/images/cloud.jpg);");
+        ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
+        break;
+    case 4:
+        str="Cloud";
+        ui->pushButton->setStyleSheet("border-image: url(:/pic/images/face.jpg);");
+        ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
+        ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
+        ui->pushButton_4->setStyleSheet("border-image: url(:/pic/images/cameraxz.jpg);");
+        ui->pushButton_5->setStyleSheet("border-image: url(:/pic/images/cloudyy.jpg);");
+        ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
+        break;
+    case 5:
+        str="Ethernet interface";
+        ui->pushButton->setStyleSheet("border-image: url(:/pic/images/face.jpg);");
+        ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
+        ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
+        ui->pushButton_4->setStyleSheet("border-image: url(:/pic/images/cameraxz.jpg);");
+        ui->pushButton_5->setStyleSheet("border-image: url(:/pic/images/cloud.jpg);");
+        ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/ethyy.jpg);");
         break;
     }
     ui->labelmsg->setText(str);

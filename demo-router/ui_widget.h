@@ -180,11 +180,11 @@ public:
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "Widget", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("Widget", "4g info", 0, QApplication::UnicodeUTF8));
-        labelonline->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
-        labelonlinecsq->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
+        labelonline->setText(QApplication::translate("Widget", "Init...", 0, QApplication::UnicodeUTF8));
+        labelonlinecsq->setText(QApplication::translate("Widget", "Please wait.", 0, QApplication::UnicodeUTF8));
         labelonlinepic->setText(QString());
-        labelonlinecops->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
-        labelband->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
+        labelonlinecops->setText(QString());
+        labelband->setText(QString());
         groupBox_2->setTitle(QApplication::translate("Widget", "wifi info", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Widget", "ssid:V3S-ESP8089", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Widget", "password:88888888", 0, QApplication::UnicodeUTF8));

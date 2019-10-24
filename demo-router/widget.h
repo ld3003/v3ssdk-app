@@ -57,6 +57,7 @@ public:
     void getallserialport();
     serialreadthread* m_preadThread;
     QTimer* m_pTimer;
+    QTimer* m_pIntTimer;
     static int serial;
     char sendbuf[512];
     char rxbuf[512];
@@ -81,6 +82,7 @@ public:
     QProcess* p2;
 public slots:
     void ask_timeout();
+    void init_timeout();
     void update4gs(int flag,int ceq,QString cops,QString band);
 private:
     Ui::Widget *ui;

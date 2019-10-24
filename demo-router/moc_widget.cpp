@@ -22,7 +22,7 @@ static const uint qt_meta_data_Widget[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,13 +31,15 @@ static const uint qt_meta_data_Widget[] = {
 
  // slots: signature, parameters, type, tag, flags
        8,    7,    7,    7, 0x0a,
-      41,   22,    7,    7, 0x0a,
+      22,    7,    7,    7, 0x0a,
+      56,   37,    7,    7, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Widget[] = {
-    "Widget\0\0ask_timeout()\0flag,ceq,cops,band\0"
+    "Widget\0\0ask_timeout()\0init_timeout()\0"
+    "flag,ceq,cops,band\0"
     "update4gs(int,int,QString,QString)\0"
 };
 
@@ -48,7 +50,8 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Widget *_t = static_cast<Widget *>(_o);
         switch (_id) {
         case 0: _t->ask_timeout(); break;
-        case 1: _t->update4gs((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
+        case 1: _t->init_timeout(); break;
+        case 2: _t->update4gs((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
         default: ;
         }
     }
@@ -86,9 +89,9 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

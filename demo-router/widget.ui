@@ -63,7 +63,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>Init...</string>
                   </property>
                  </widget>
                 </item>
@@ -76,7 +76,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>Please wait.</string>
                   </property>
                  </widget>
                 </item>
@@ -109,7 +109,7 @@
             <item>
              <widget class="QLabel" name="labelonlinecops">
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -118,7 +118,7 @@
           <item>
            <widget class="QLabel" name="labelband">
             <property name="text">
-             <string>TextLabel</string>
+             <string/>
             </property>
            </widget>
           </item>

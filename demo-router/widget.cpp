@@ -46,36 +46,13 @@ Widget::Widget(QWidget *parent) :
 
 
 
+    m_pIntTimer=new QTimer;
+    connect(m_pIntTimer,SIGNAL(timeout()),this,SLOT(init_timeout()));
+    m_pIntTimer->start(1000);
 
 
 
 
-    system("/root/bin/usb-set-hostmode.sh");
-    qDebug()<<"***************************************** run 4g";
-
-
-    system("/root/bin/hostap.sh");
-
-    qDebug()<<"***************************************** run wifi";
-    delay(5000);
-
-    //system("udhcpc -i eth0 &");
-    system("udhcpc -i eth1 &");
-
-    delay(5000);
-    getip();
-
-
-
-    isworking=islanworking();
-    qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<isworking;
-
-
-    hastabled=FALSE;
-  //  p1=new QProcess();
-  // p2=new QProcess();
-
-    configserial();
 
 
 }
@@ -150,11 +127,13 @@ void Widget::getip()
                 if(entry.ip().protocol()==QAbstractSocket::IPv4Protocol)
                     m_4gip=entry.ip().toString();
             }
+            /*
             else  if(interface.name()=="eth0")
             {
                 if(entry.ip().protocol()==QAbstractSocket::IPv4Protocol)
                     m_lanip=entry.ip().toString();
             }
+            */
 
         }
    }
@@ -340,6 +319,37 @@ void Widget::ask_timeout()
         }
      }
 
+}
+
+void Widget::init_timeout()
+{
+    m_pIntTimer->stop();
+    system("/root/bin/usb-set-hostmode.sh");
+    qDebug()<<"***************************************** run 4g";
+
+
+    system("/root/bin/hostap.sh");
+
+    qDebug()<<"***************************************** run wifi";
+    delay(5000);
+
+    //system("udhcpc -i eth0 &");
+    system("udhcpc -i eth1 &");
+
+    delay(5000);
+    getip();
+
+
+
+    isworking=islanworking();
+    qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<isworking;
+
+
+    hastabled=FALSE;
+  //  p1=new QProcess();
+  // p2=new QProcess();
+
+    configserial();
 }
 
 void Widget::update4gs(int flag,int ceq,QString cops,QString band)

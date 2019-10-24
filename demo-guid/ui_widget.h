@@ -33,6 +33,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *pushButton_5;
+    QPushButton *pushButton_6;
     QLabel *labelmsg;
 
     void setupUi(QWidget *Widget)
@@ -49,15 +52,15 @@ public:
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(10);
+        verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(10);
+        horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         pushButton = new QPushButton(Widget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setMinimumSize(QSize(110, 110));
-        pushButton->setMaximumSize(QSize(110, 110));
+        pushButton->setMinimumSize(QSize(80, 80));
+        pushButton->setMaximumSize(QSize(80, 80));
         pushButton->setAutoFillBackground(false);
         pushButton->setStyleSheet(QString::fromUtf8("border-image: url(:/pic/images/face.jpg);"));
         pushButton->setFlat(true);
@@ -66,8 +69,8 @@ public:
 
         pushButton_2 = new QPushButton(Widget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setMinimumSize(QSize(110, 110));
-        pushButton_2->setMaximumSize(QSize(110, 110));
+        pushButton_2->setMinimumSize(QSize(80, 80));
+        pushButton_2->setMaximumSize(QSize(80, 80));
         pushButton_2->setAutoFillBackground(false);
         pushButton_2->setStyleSheet(QString::fromUtf8("border-image: url(:/pic/images/sml.jpg);"));
         pushButton_2->setFlat(true);
@@ -78,12 +81,12 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(10);
+        horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         pushButton_3 = new QPushButton(Widget);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setMinimumSize(QSize(110, 110));
-        pushButton_3->setMaximumSize(QSize(110, 110));
+        pushButton_3->setMinimumSize(QSize(80, 80));
+        pushButton_3->setMaximumSize(QSize(80, 80));
         pushButton_3->setStyleSheet(QString::fromUtf8("border-image: url(:/pic/images/trans.jpg);"));
         pushButton_3->setFlat(true);
 
@@ -91,8 +94,8 @@ public:
 
         pushButton_4 = new QPushButton(Widget);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setMinimumSize(QSize(110, 110));
-        pushButton_4->setMaximumSize(QSize(110, 110));
+        pushButton_4->setMinimumSize(QSize(80, 80));
+        pushButton_4->setMaximumSize(QSize(80, 80));
         pushButton_4->setStyleSheet(QString::fromUtf8("border-image: url(:/pic/images/camera.jpg);"));
         pushButton_4->setFlat(true);
 
@@ -100,6 +103,26 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        pushButton_5 = new QPushButton(Widget);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton_5->setMinimumSize(QSize(80, 80));
+        pushButton_5->setMaximumSize(QSize(80, 80));
+
+        horizontalLayout_3->addWidget(pushButton_5);
+
+        pushButton_6 = new QPushButton(Widget);
+        pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
+        pushButton_6->setMinimumSize(QSize(80, 80));
+        pushButton_6->setMaximumSize(QSize(80, 80));
+
+        horizontalLayout_3->addWidget(pushButton_6);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
         labelmsg = new QLabel(Widget);
         labelmsg->setObjectName(QString::fromUtf8("labelmsg"));
@@ -122,6 +145,8 @@ public:
         pushButton_2->setText(QString());
         pushButton_3->setText(QString());
         pushButton_4->setText(QString());
+        pushButton_5->setText(QApplication::translate("Widget", "PushButton", 0, QApplication::UnicodeUTF8));
+        pushButton_6->setText(QApplication::translate("Widget", "PushButton", 0, QApplication::UnicodeUTF8));
         labelmsg->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
