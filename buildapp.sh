@@ -76,10 +76,10 @@ function build_demos()
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber} demo-camera
 
 
-	cd $APP_DIR/gpio/
-	echo "*****************************************"
-	pwd
-	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
+	#cd $APP_DIR/gpio/
+	#echo "*****************************************"
+	#pwd
+	#make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
 
 	#cd $APP_DIR/demo-codec/
 	#echo "*****************************************"
@@ -133,22 +133,15 @@ function build_demos()
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber} test
 
 
-	cd $APP_DIR/cam4g
-	echo "*****************************************"
-	pwd
-	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
+	#cd $APP_DIR/cam4g
+	#echo "*****************************************"
+	#pwd
+	#make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
 
 	cd $APP_DIR/opencv2fb
 	echo "*****************************************"
 	pwd
 	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
-
-
-	cd $APP_DIR/facedetapp
-	echo "*****************************************"
-	pwd
-	make CROSS_COMPILE=$BR_CROSS_COMPILE -j ${logicalNumber}
-
 
 
 	cd $APP_DIR/serialport_linux/src
