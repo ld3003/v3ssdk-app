@@ -187,7 +187,7 @@ function build_demos()
 	cp -v qrcode/qrcode ./sdcard/demo-qrcode
 	cp -v demo-mjpgcloud/cloud.cfg ./sdcard/cloud.cfg
 	cp -v demo-eth/demo-eth ./sdcard/
-
+        cp -v demo-mjpgcloud/demo-cloud ./sdcard/
 
 }
 
