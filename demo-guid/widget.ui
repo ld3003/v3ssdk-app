@@ -164,6 +164,9 @@
            <height>80</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/pic/images/cloud.jpg);</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -182,6 +185,9 @@
            <width>80</width>
            <height>80</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-image: url(:/pic/images/eth.jpg);</string>
          </property>
          <property name="text">
           <string/>

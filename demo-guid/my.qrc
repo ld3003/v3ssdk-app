@@ -10,5 +10,9 @@
         <file>images/transxz.jpg</file>
         <file>images/cameraxz.jpg</file>
         <file>images/back.png</file>
+        <file>images/cloud.jpg</file>
+        <file>images/cloudyy.jpg</file>
+        <file>images/eth.jpg</file>
+        <file>images/ethyy.jpg</file>
     </qresource>
 </RCC>
