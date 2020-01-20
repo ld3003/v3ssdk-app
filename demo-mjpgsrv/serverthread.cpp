@@ -83,6 +83,7 @@ void serverthread::run()
 
         params.push_back(CV_IMWRITE_JPEG_QUALITY);
         params.push_back(50);
+        cv::flip(frame,frame,0);
         cv::imencode(".jpg", frame, outbuf, params);
 
         printf("img len %d \n",outbuf.size());

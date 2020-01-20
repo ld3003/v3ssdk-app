@@ -161,9 +161,7 @@ bool Widget::islanworking()
 
 void Widget::iptable(QString desip)
 {
-    system("iptables -t nat -F");
-    system("iptables -t nat -X");
-    system("iptables -t nat -Z");
+
     QString str=QString("iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to %1").arg(desip);
     qDebug()<<str;
     system(str.toLocal8Bit().data());
@@ -277,6 +275,9 @@ void Widget::ask_timeout()
          //p1->start("udhcpc -i eth0");
         // p2->start("udhcpc -i eth1");
 
+    system("iptables -t nat -F");
+    system("iptables -t nat -X");
+    system("iptables -t nat -Z");
 
          if(islanworking())
          {

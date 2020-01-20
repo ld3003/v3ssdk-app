@@ -80,6 +80,7 @@ void DetectThread::run()
 
         struct timeval gTpstart ,gTpend;
         //time_consuming_start(&gTpstart,&gTpend);
+      //  cv::flip(ncnn_img,ncnn_img,2);
          qDebug()<<"44444";
         mtcnn->detectMaxFace(ncnn_img, finalBbox);
         //time_consuming_print("detect time",&gTpstart,&gTpend);

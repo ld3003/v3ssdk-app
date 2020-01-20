@@ -49,7 +49,7 @@ void CamThread::run()
         mImglocker.lock();
         *mCap >> mImageData2;
         mImageData2 = mImageData2(cv::Rect(150 , 80 , 240 , 320));
-        cv::flip(mImageData2, mImageData2, 1);
+        cv::flip(mImageData2, mImageData2, 0);
         mImglocker.unlock();
 
 

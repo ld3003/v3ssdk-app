@@ -47,6 +47,8 @@ void CamThread::run()
 
         mImglocker.lock();
         *mCap >> mImageData1;
+       // cv::transpose(mImageData1, mImageData1);
+        cv::flip(mImageData1,mImageData1,0);
         //cv::Rect rect(184, 0, DEV_WINDOWS_W, DEV_WINDOWS_H);
         //mImageData1 = mImageData1(rect);
         mImageData2 = mImageData1;

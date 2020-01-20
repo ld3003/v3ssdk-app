@@ -31,11 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
     detThread->start();
 
     tipLable = new QLabel(this);
-    tipLable->setGeometry(0,0,this->width(),this->height());
+    tipLable->setGeometry(0,0,this->width(),100);
     tipLable->hide();
 
     QFont ft;
-    ft.setPointSize(100);
+    ft.setPointSize(80);
     tipLable->setFont(ft);
 
     QPalette pa;
