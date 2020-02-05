@@ -91,6 +91,26 @@ int main(int argc,char ** argv)
 	     return -1;
      }
 
+printf("release !!!!!!!!!!!!!!!!!!!!!!!!!!!!!1\n");
+	g_cap->release();
+
+     delete g_cap;
+
+    sleep(1);
+
+     g_cap = new cv::VideoCapture(1);
+
+     if (g_cap->isOpened())
+     {
+	     printf("opencamera success\n");
+     }
+     else
+     {
+	     printf("opencamera error\n");
+	     return -1;
+     }
+
+
 
     for (;;)
     {

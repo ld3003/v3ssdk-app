@@ -56,17 +56,18 @@ void serverthread::run()
     Load_File("Bart.jpg",&g_Img2Data, &g_Img2Size);
 
 
-     g_cap = new cv::VideoCapture(1);
+    g_cap = new cv::VideoCapture(1);
+    if( g_cap->isOpened())
+    {
+        g_cap->release();
+    }
+    else
+    {
+    }
+    g_cap = new cv::VideoCapture(1);
 
-     if (g_cap->isOpened())
-     {
-         printf("opencamera success\n");
-     }
-     else
-     {
-         printf("opencamera error\n");
-         return ;
-     }
+
+
 
 
     for (;;)

@@ -76,6 +76,7 @@ void serverthread::run()
 
      if (g_cap->isOpened())
      {
+	g_cap->release();
          printf("opencamera success\n");
      }
      else
@@ -83,6 +84,8 @@ void serverthread::run()
          printf("opencamera error\n");
          return ;
      }
+	g_cap = new cv::VideoCapture(1);
+
 
 
     for (;;)
