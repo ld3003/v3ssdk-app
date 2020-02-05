@@ -8,10 +8,16 @@
 #include <QLabel>
 #include <QPixmap>
 #include "processmgr.h"
-#define KEY1 16777220
+#define KEY1 16777220   
 #define KEY2 0
 #define KEY3 16777328
-#define KEY4 16777330
+#define KEY4 16777330  //next
+
+#define KEY_HOME 16777330
+#define KEY_ENTER 16777220
+#define KEY_NEXT 16777328
+#define KEY_PREV 0
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -46,7 +52,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
 {
     qDebug()<<event->key();
 
-    if(event->key()==KEY1)
+    if(event->key()==KEY_NEXT)
     {
         key_index++;
         key_index%=6;
@@ -62,7 +68,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/smlxz.jpg);");
     */
 
-    if(event->key()==KEY4)
+    if(event->key()==KEY_ENTER)
     {
 
 	    killprocess("udhcpc");

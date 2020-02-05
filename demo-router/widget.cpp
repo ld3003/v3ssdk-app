@@ -11,10 +11,7 @@
 
 int Widget::serial=-1;
 #define MAX_AT_CNT 6
-#define KEY1 16777220
-#define KEY2 0
-#define KEY3 16777328
-#define KEY4 16777330
+#define KEY3 16777330
 Widget* mwgt;
 Widget::Widget(QWidget *parent) :
     QWidget(parent),

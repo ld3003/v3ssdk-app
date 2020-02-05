@@ -15,10 +15,7 @@ cv::Mat MainWindow::realshort=cv::imread("noway.jpg", CV_LOAD_IMAGE_COLOR);
 int MainWindow::sampneedinit=0;
 int MainWindow::needcmp=0;
 MainWindow *mw;
-#define KEY1 16777220
-#define KEY2 0
-#define KEY3 16777328
-#define KEY4 16777330
+#define KEY3 16777330
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

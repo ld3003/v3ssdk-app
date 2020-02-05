@@ -10,10 +10,7 @@
 #include <QProcess>
 #include <QSettings>
 #include <QNetworkInterface>
-#define KEY1 16777220
-#define KEY2 0
-#define KEY3 16777328
-#define KEY4 16777330
+#define KEY3 16777330
 Widget* myW;
 Widget::Widget(QWidget *parent) :
     QWidget(parent),

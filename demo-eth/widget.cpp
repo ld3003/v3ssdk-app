@@ -6,10 +6,7 @@
 #include "tcpclient.h"
 #include <QTextEdit>
 #include <QKeyEvent>
-#define KEY1 16777220
-#define KEY2 0
-#define KEY3 16777328
-#define KEY4 16777330
+#define KEY3 16777330
 Widget* myW=NULL;
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
