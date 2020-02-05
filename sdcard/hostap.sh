@@ -1,4 +1,4 @@
-
+ifconfig wlan0 down
 ifconfig wlan0 192.168.10.1
 hostapd /etc/hostapd.conf &
 udhcpd -I 192.168.10.1 /etc/udhcpd.conf &

@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     serialport.cpp \
     serialreadthread.cpp \
     error-log.cpp \
-    net_detect.cpp
+    net_detect.cpp \
+    processmgr.cpp
 
 HEADERS  += widget.h \
     serialport.h \
     serialreadthread.h \
     error-log.h \
-    net_detect.h
+    net_detect.h \
+    processmgr.h
 
 FORMS    += widget.ui
 

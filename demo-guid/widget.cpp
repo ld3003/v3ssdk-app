@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QPixmap>
+#include "processmgr.h"
 #define KEY1 16777220
 #define KEY2 0
 #define KEY3 16777328
@@ -63,6 +64,12 @@ void Widget::keyPressEvent(QKeyEvent *event)
 
     if(event->key()==KEY4)
     {
+
+	    killprocess("udhcpc");
+	    killprocess("hostapd");
+	    killprocess("udhcpd");
+
+
         if(key_index==1)
             system("/root/bin/demo-qrcode -qws");
         else if(key_index==0)

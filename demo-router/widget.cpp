@@ -7,6 +7,7 @@
 #include <QGroupBox>
 #include <QKeyEvent>
 #include <QNetworkInterface>
+#include "processmgr.h"
 
 int Widget::serial=-1;
 #define MAX_AT_CNT 6
@@ -23,6 +24,11 @@ Widget::Widget(QWidget *parent) :
     mwgt=this;
     setWindowFlags(Qt::FramelessWindowHint);
     setWindowOpacity(0.7);
+
+    killprocess("udhcpc");
+    killprocess("hostapd");
+    killprocess("udhcpd");
+       
 
     sendindex=0;
     m_4gip="";
