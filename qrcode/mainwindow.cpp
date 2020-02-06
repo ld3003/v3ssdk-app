@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     detThread->start();
 
     tipLable = new QLabel(this);
-    tipLable->setGeometry(0,0,this->width(),100);
+    tipLable->setGeometry(0,0,this->width(),400);
     tipLable->hide();
 
     QFont ft;
@@ -40,11 +40,33 @@ MainWindow::MainWindow(QWidget *parent) :
     tipLable->setPalette(pa);
 
     tipLable->setAlignment(Qt::AlignCenter);
-
+    tipLable->setWordWrap(true);
+    tipLable->setAlignment(Qt::AlignTop);
     tipMsgtimer = new QTimer(this);
     connect(tipMsgtimer,SIGNAL(timeout()),this,SLOT(tipmsgTimeout()));
 
 }
+
+QString AutoFeed(QString text)
+{
+     QString strText = text;
+     int AntoIndex = 1;
+     if(!strText.isEmpty())
+     {
+ 
+         for(int i = 1;i<strText.size() + 1;i++)//25个字符换一行
+         {
+             if(i == 18*AntoIndex + AntoIndex -1)
+             {
+                 strText.insert(i,"\n");
+                 AntoIndex ++;
+             }
+ 
+         }
+     }
+     return strText;
+}
+
 
 void MainWindow::imgFlush(QImage img)
 {
@@ -58,7 +80,7 @@ void MainWindow::tipmsg(QString str)
 
     qDebug() << "Tip msg : " << str;
     tipLable->show();
-    tipLable->setText(str);
+    tipLable->setText(AutoFeed(str));
     //tipLable->setTextFormat()
     //
     tipMsgtimer->start(1000);
