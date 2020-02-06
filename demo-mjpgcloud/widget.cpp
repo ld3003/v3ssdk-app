@@ -26,7 +26,7 @@ Widget::Widget(QWidget *parent) :
 
   //  QProcess *process1 = new QProcess(); process->start("udhcpc -i eth0");
 
-  //  system("sh /root/bin/hostap.sh");
+    system("sh /root/bin/usb-set-hostmode.sh");
 
     system("udhcpc -i eth1 &");
 
