@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-	processmgr.cpp
+	processmgr.cpp\
+	gpio.cpp
 
 HEADERS  += widget.h \
-	 processmgr.h
+	 processmgr.h \
+	gpio.h
 
 FORMS    += widget.ui
 
