@@ -165,165 +165,174 @@ bool Widget::islanworking()
 void Widget::iptable(QString desip)
 {
 
-    QString str=QString("iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to %1").arg(desip);
-    qDebug()<<str;
-    system(str.toLocal8Bit().data());
+	QString str=QString("iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to %1").arg(desip);
+	qDebug()<<"run iptables :" << str;
+	system(str.toLocal8Bit().data());
 
-    //192.168.2.138
+	//192.168.2.138
 }
 
 void Widget::delay(int ms)
 {
-    QTime dieTime= QTime::currentTime().addMSecs(ms);
-     while( QTime::currentTime() < dieTime )
-     QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+	QTime dieTime= QTime::currentTime().addMSecs(ms);
+	while( QTime::currentTime() < dieTime )
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
 void Widget::ask_timeout()
 {
-    unsigned int hasack=0;
+	unsigned int hasack=0;
 
-     qDebug()<<"ask timeout!";
-      QString str;
+	qDebug()<<"ask timeout!";
+	QString str;
 
-     switch(sendindex)
-     {
-     case 0:
-         str ="AT+CGATT?\r\n";
-         break;
-     case 1:
-         str ="AT+CSQ\r\n";
-         break;
-     case 2:
-         str ="AT+COPS?\r\n";
-         break;
-     case 4:
-         str ="AT^SYSINFO\r\n";
-         break;
-     case 5:
-         str="AT*BANDIND?\r\n";
-         break;
-     }
-
-
-     qDebug()<<"<--"<<str;
-     write(serial, str.toLatin1().data(), str.length());
-
-     sendindex++;
-     sendindex%=MAX_AT_CNT;
-
-     QTime dieTime = QTime::currentTime().addMSecs(100);
-
-     while( QTime::currentTime() < dieTime )
-
-     QCoreApplication::processEvents(QEventLoop::AllEvents, 10);
+	switch(sendindex)
+	{
+		case 0:
+			str ="AT+CGATT?\r\n";
+			break;
+		case 1:
+			str ="AT+CSQ\r\n";
+			break;
+		case 2:
+			str ="AT+COPS?\r\n";
+			break;
+		case 4:
+			str ="AT^SYSINFO\r\n";
+			break;
+		case 5:
+			str="AT*BANDIND?\r\n";
+			break;
+	}
 
 
-     int num;
-     char *h;
-     while ((num = read(serial, rxbuf, 512)) > 0)
-     {
-         qDebug()<<"read num: "<<num;
-         rxbuf[num + 1] = '\0';
-         printf("[%s]\n", rxbuf);
+	qDebug()<<"<--"<<str;
+	write(serial, str.toLatin1().data(), str.length());
 
-          if (strstr(rxbuf, "+CGATT: 1"))
-          {
-             online=1;
-             qDebug()<<1111;
-          }
-          if (strstr(rxbuf, "+CGATT: 0"))
-          {
-             online=0;
-             qDebug()<<2222;
-          }
-          if (strstr(rxbuf, "+CSQ: "))
-          {
-              h=strstr(rxbuf, "+CSQ: ");
-              QString str=QString(QLatin1String(h));
+	sendindex++;
+	sendindex%=MAX_AT_CNT;
 
-              qDebug()<<str;
-              csq=atoi(str.mid(6,2).toLatin1().data());
+	QTime dieTime = QTime::currentTime().addMSecs(100);
 
-          }
-          if (strstr(rxbuf, "+COPS: "))
-          {
-              h=strstr(rxbuf, "\"");
+	while( QTime::currentTime() < dieTime )
 
-              QString str=QString(QLatin1String(h+1));
-
-              cops=str.mid(0,str.indexOf("\""));
-
-              qDebug()<<"zzzzzzzzz"<<cops;
-
-          }
-
-          if (strstr(rxbuf, "*BANDIND: "))
-          {
-              h=strstr(rxbuf, "\,");
-              QString str=QString(QLatin1String(h+1));
-              band=str.mid(1,1);
-              qDebug()<<band;
-          }
-
-          hasack=1;
-     }
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 10);
 
 
-     update4gs(online,csq,cops,band);
-     update();
+	int num;
+	char *h;
+	while ((num = read(serial, rxbuf, 512)) > 0)
+	{
+		qDebug()<<"read num: "<<num;
+		rxbuf[num + 1] = '\0';
+		printf("[%s]\n", rxbuf);
 
-     if(hastabled==FALSE)
-     {
-         //p1->start("udhcpc -i eth0");
-        // p2->start("udhcpc -i eth1");
+		if (strstr(rxbuf, "+CGATT: 1"))
+		{
+			online=1;
+			qDebug()<<1111;
+		}
+		if (strstr(rxbuf, "+CGATT: 0"))
+		{
+			online=0;
+			qDebug()<<2222;
+		}
+		if (strstr(rxbuf, "+CSQ: "))
+		{
+			h=strstr(rxbuf, "+CSQ: ");
+			QString str=QString(QLatin1String(h));
 
-    system("iptables -t nat -F");
-    system("iptables -t nat -X");
-    system("iptables -t nat -Z");
+			qDebug()<<str;
+			csq=atoi(str.mid(6,2).toLatin1().data());
 
-         if(islanworking())
-         {
-            getip();
-            qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<islanworking();
+		}
+		if (strstr(rxbuf, "+COPS: "))
+		{
+			h=strstr(rxbuf, "\"");
 
-            if(hasack==1)
-            {
-                if(online==1)
-                {//4g
-                    if(m_4gip!="")
-                    {
-                        iptable(m_4gip);
-                        hastabled=TRUE;
-                        ui->label_3->setText("Internet:use 4G");
-                        qDebug()<<"<<<<<<<<<4G router>>>>>>>>";
-                    }
-                }
-                else
-                {//lan
-                    if(m_lanip!="")
-                    {
-                        hastabled=TRUE;
-                        iptable(m_lanip);
-                        ui->label_3->setText("Internet:use Lan");
-                        qDebug()<<"<<<<<<<<<LAN router>>>>>>>>";
-                    }
-                }
-            }
-            else
-            {
-                if(m_lanip!="")
-                {
-                    hastabled=TRUE;
-                    iptable(m_lanip);
-                    ui->label_3->setText("Internet:use Lan");
+			QString str=QString(QLatin1String(h+1));
 
-                }
-            }
-        }
-     }
+			cops=str.mid(0,str.indexOf("\""));
 
+			qDebug()<<"zzzzzzzzz"<<cops;
+
+		}
+
+		if (strstr(rxbuf, "*BANDIND: "))
+		{
+			h=strstr(rxbuf, "\,");
+			QString str=QString(QLatin1String(h+1));
+			band=str.mid(1,1);
+			qDebug()<<band;
+		}
+
+		hasack=1;
+	}
+
+
+	update4gs(online,csq,cops,band);
+	update();
+
+	{
+		//p1->start("udhcpc -i eth0");
+		// p2->start("udhcpc -i eth1");
+
+		system("iptables -t nat -F");
+		system("iptables -t nat -X");
+		system("iptables -t nat -Z");
+		iptable(QString("192.168.0.100"));
+
+		getip();
+		qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<islanworking();
+
+		if (m_4gip.isEmpty() )
+		{
+		    system("/root/bin/usb-set-hostmode.sh");
+		    sleep(2);
+		    system("udhcpc -i eth1 &");
+		    sleep(5);
+
+
+			//
+		}
+#if 0
+		if(hasack==1)
+		{
+			if(online==1)
+			{//4g
+				if(m_4gip!="")
+				{
+					iptable(m_4gip);
+					hastabled=TRUE;
+					ui->label_3->setText("Internet:use 4G");
+					qDebug()<<"<<<<<<<<<4G router>>>>>>>>";
+				}
+			}
+			else
+			{//lan
+				if(m_lanip!="")
+				{
+					hastabled=TRUE;
+					iptable(m_lanip);
+					ui->label_3->setText("Internet:use Lan");
+					qDebug()<<"<<<<<<<<<LAN router>>>>>>>>";
+				}
+			}
+		}
+		else
+		{
+			if(m_lanip!="")
+			{
+				hastabled=TRUE;
+				iptable(m_lanip);
+				ui->label_3->setText("Internet:use Lan");
+
+			}
+		}
+#endif
+	}
 }
+
 
 void Widget::init_timeout()
 {
@@ -342,16 +351,6 @@ void Widget::init_timeout()
 
     delay(5000);
     getip();
-
-
-
-    isworking=islanworking();
-    qDebug()<<"****************************************4g ip="<<m_4gip<<",lan ip="<<m_lanip<<"Lan working:"<<isworking;
-
-
-    hastabled=FALSE;
-  //  p1=new QProcess();
-  // p2=new QProcess();
 
     configserial();
 }
