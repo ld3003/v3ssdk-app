@@ -4,7 +4,7 @@
 serverthread::serverthread(QObject *obj)
 {
     initskt();
-    m_scaled=0.5;
+    m_scaled=1;
 }
 
 void serverthread::initskt()
@@ -100,8 +100,8 @@ void serverthread::run()
         std::vector<unsigned char> outbuf;
         std::vector<int> params;
 
-        cv::Size dsize = cv::Size(frame.cols*m_scaled,frame.rows*m_scaled);
-        cv::resize(frame,frame,dsize);
+        //cv::Size dsize = cv::Size(frame.cols*m_scaled,frame.rows*m_scaled);
+        //cv::resize(frame,frame,dsize);
 
         params.push_back(CV_IMWRITE_JPEG_QUALITY);
         params.push_back(50);
