@@ -27,16 +27,22 @@ void CamThread::run()
     QImage Img;
     cv::Mat tmppic0,tmppic;
 
-    mCap = new cv::VideoCapture(1);
+
+mCap = new cv::VideoCapture(1);
 
     if( mCap->isOpened())
     {
         qDebug() <<"opencamera success" ;
+        mCap->release();
     }
     else
-    {
+    {   
         qDebug() << "opencamera error" ;
     }
+
+    mCap = new cv::VideoCapture(1);
+
+    mCap->set(CV_CAP_PROP_FPS, 10);
 
 
 
