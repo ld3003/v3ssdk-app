@@ -17,12 +17,14 @@ SOURCES += main.cpp\
         widget.cpp \
     MjpgServerClass.cpp \
     ServerClass.cpp \
-    serverthread.cpp
+    serverthread.cpp \
+    connthread.cpp
 
 HEADERS  += widget.h \
     MjpgServerClass.h \
     ServerClass.h \
-    serverthread.h
+    serverthread.h \
+    connthread.h
 
 FORMS    += widget.ui
 LIBS    += -ljpeg -lcurl -lopencv_core -lopencv_objdetect -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio

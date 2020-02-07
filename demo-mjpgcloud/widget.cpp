@@ -10,6 +10,8 @@
 #include <QProcess>
 #include <QSettings>
 #include <QNetworkInterface>
+#include "connthread.h"
+
 #define KEY3 16777330
 Widget* myW;
 Widget::Widget(QWidget *parent) :
@@ -25,13 +27,6 @@ Widget::Widget(QWidget *parent) :
    // QProcess *process = new QProcess(); process->start("sh /root/sdcard/hostap.sh");
 
   //  QProcess *process1 = new QProcess(); process->start("udhcpc -i eth0");
-
-    system("sh /root/bin/usb-set-hostmode.sh");
-
-    sleep(2);
-
-    system("udhcpc -i eth1 &");
-    sleep(5);
 
     m_strlocalip="";
     m_pinitTimer=new QTimer;
@@ -71,6 +66,8 @@ Widget::Widget(QWidget *parent) :
     ui->labelstat->setPalette(paa);
     //ui->labelstat->setText("Client:0");
 
+    //connthd=new connthread(this);
+    //connthd->start();
 
 }
 
@@ -143,7 +140,11 @@ void Widget::inittimeout()
    }
    if((m_strlocalip=="")||(m_strlocalip=="0.0.0.0"))
    {
-       ui->labelstat->setText("get lan ip failed!");
+       ui->labelstat->setText("wait 4g connect!\n");
+       system("sh /root/bin/usb-set-hostmode.sh");
+       sleep(2);
+       system("udhcpc -i eth1 &");
+       sleep(2);
    }
    else
    {

@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "serverthread.h"
+#include "connthread.h"
+
 #include <QTimer>
 #define SERVERPORT 7888
 namespace Ui {
@@ -17,6 +19,8 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
     serverthread* sthd;
+    connthread* connthd;
+
      void keyPressEvent(QKeyEvent *event);
      QString m_strip;
      quint16 m_port;
