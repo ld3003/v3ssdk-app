@@ -1,6 +1,9 @@
 #include "widget.h"
 #include <QApplication>
 #include "gpio.h"
+
+
+#if 1
 int main(int argc, char *argv[])
 {
 
@@ -14,3 +17,4 @@ int main(int argc, char *argv[])
 
     return a.exec();
 }
+#endif

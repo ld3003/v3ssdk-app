@@ -91,14 +91,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     syschecktimer->start(1000);
 
-    GPIO_Init();
-    GPIO_ConfigPin(PG,0,OUT);
-    GPIO_ConfigPin(PB,0,OUT);
-    GPIO_ConfigPin(PB,1,OUT);
-    GPIO_ConfigPin(PB,2,OUT);
-    GPIO_SetPin(PB,0,1);
-    GPIO_SetPin(PB,1,1);
-    GPIO_SetPin(PB,2,1);
     a = 0;
 
 

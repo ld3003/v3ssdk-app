@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QPixmap>
+#include <QFontDatabase>
 #include "processmgr.h"
 #define KEY1 16777220   
 #define KEY2 0
@@ -17,6 +18,29 @@
 #define KEY_ENTER 16777220
 #define KEY_NEXT 16777328
 #define KEY_PREV 0
+
+#include <QtGui/QApplication>
+#include <QTextCodec>   /**1.添加此头文件**/
+ 
+#if 0
+int main(int argc, char *argv[])
+{
+    /**2.添加下面三句话**/ 
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+ 
+    QApplication a(argc, argv);
+    FindDialog *dialog = new FindDialog;
+    /**3.添加要使用的字库，和字体大小，wpy-zenhei即为字库名**/
+    dialog->setFont(QFont("wqy-zenhei",14,QFont::Normal));
+    dialog->show();
+ 
+    return a.exec();
+}
+
+#endif
+
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -100,7 +124,7 @@ void Widget::setlabeltext(unsigned int index)
     switch(index)
     {
     case 0:
-        str="face recognition";
+        str="niti呵呵";
         ui->pushButton->setStyleSheet("border-image: url(:/pic/images/facexz.jpg);");
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
@@ -154,6 +178,25 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/ethyy.jpg);");
         break;
     }
+
+	int fontId = QFontDatabase::addApplicationFont("/root/");
+QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
+qDebug() << "font list " << fontFamilies;
+
+// 创建字体
+QFont font;
+font.setFamily(fontFamilies.at(0)); //FontAwesome
+font.setPointSize(20);
+
+    /**2.添加下面三句话**/ 
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+ 
+    /**3.添加要使用的字库，和字体大小，wpy-zenhei即为字库名**/
+    ui->labelmsg->setFont(QFont("simhei",14,QFont::Normal));
+
+
     ui->labelmsg->setText(str);
 
 }

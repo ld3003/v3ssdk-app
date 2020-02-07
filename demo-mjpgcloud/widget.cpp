@@ -28,7 +28,10 @@ Widget::Widget(QWidget *parent) :
 
     system("sh /root/bin/usb-set-hostmode.sh");
 
+    sleep(2);
+
     system("udhcpc -i eth1 &");
+    sleep(5);
 
     m_strlocalip="";
     m_pinitTimer=new QTimer;
