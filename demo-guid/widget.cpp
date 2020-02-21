@@ -17,7 +17,7 @@
 #define KEY_HOME 16777330
 #define KEY_ENTER 16777220
 #define KEY_NEXT 16777328
-#define KEY_PREV 0
+#define KEY_PREV 65
 
 #include <QtGui/QApplication>
 #include <QTextCodec>   /**1.添加此头文件**/
@@ -81,6 +81,15 @@ void Widget::keyPressEvent(QKeyEvent *event)
         key_index++;
         key_index%=6;
     }
+
+    if(event->key()==KEY_PREV)
+    {
+        key_index--;
+        key_index%=6;
+    }
+
+
+
     qDebug()<<key_index;
 
     setlabeltext(key_index);
@@ -178,16 +187,15 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/ethyy.jpg);");
         break;
     }
-
+#if 0
 	int fontId = QFontDatabase::addApplicationFont("/root/");
 QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
 qDebug() << "font list " << fontFamilies;
-
 // 创建字体
 QFont font;
 font.setFamily(fontFamilies.at(0)); //FontAwesome
 font.setPointSize(20);
-
+#endif
     /**2.添加下面三句话**/ 
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
