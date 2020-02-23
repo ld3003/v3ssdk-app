@@ -133,7 +133,7 @@ void Widget::setlabeltext(unsigned int index)
     switch(index)
     {
     case 0:
-        str="niti呵呵";
+        str="FaceDetection";
         ui->pushButton->setStyleSheet("border-image: url(:/pic/images/facexz.jpg);");
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
@@ -151,7 +151,7 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
         break;
     case 2:
-        str="transmission";
+        str="4GRouter";
         ui->pushButton->setStyleSheet("border-image: url(:/pic/images/face.jpg);");
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/transxz.jpg);");
@@ -160,7 +160,7 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
         break;
     case 3:
-        str="Camera";
+        str="WifiCamera";
         ui->pushButton->setStyleSheet("border-image: url(:/pic/images/face.jpg);");
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
@@ -169,7 +169,7 @@ void Widget::setlabeltext(unsigned int index)
         ui->pushButton_6->setStyleSheet("border-image: url(:/pic/images/eth.jpg);");
         break;
     case 4:
-        str="Cloud";
+        str="4GCamera";
         ui->pushButton->setStyleSheet("border-image: url(:/pic/images/face.jpg);");
         ui->pushButton_2->setStyleSheet("border-image: url(:/pic/images/sml.jpg);");
         ui->pushButton_3->setStyleSheet("border-image: url(:/pic/images/trans.jpg);");
