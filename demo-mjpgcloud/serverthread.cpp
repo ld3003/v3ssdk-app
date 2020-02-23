@@ -76,7 +76,7 @@ void serverthread::run()
 
      if (g_cap->isOpened())
      {
-	g_cap->release();
+	    g_cap->release();
          printf("opencamera success\n");
      }
      else
@@ -97,8 +97,13 @@ void serverthread::run()
         if (frame.empty())
             continue;
 
+        flip(frame, frame, 0); // 翻转模式，flipCode == 0垂直翻转（沿X轴翻转），flipCode>0水平翻转（沿Y轴翻转），flipCode<0水平垂直翻转（先沿X轴翻转，再沿Y轴翻转，等价于旋转180°）
+	    flip(frame, frame, 1);
+
         std::vector<unsigned char> outbuf;
         std::vector<int> params;
+
+        //frame
 
         //cv::Size dsize = cv::Size(frame.cols*m_scaled,frame.rows*m_scaled);
         //cv::resize(frame,frame,dsize);

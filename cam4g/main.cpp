@@ -326,11 +326,6 @@ int main(int argc, char *argv[])
 
     //void GPIO_Init(void);
     //void GPIO_ConfigPin(PORT port, unsigned int pin, PIN_MODE mode);
- 
-    GPIO_Init();
-    GPIO_ConfigPin(PE, 17, OUT);
-	GPIO_SetPin(PE, 17, 0);
-
     RUN_TEST;
 
     opencam();
