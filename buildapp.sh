@@ -184,6 +184,7 @@ function build_demos()
 	cp -v demo-router/demo-router ./sdcard/
 	cp -v demo-mjpgsrv/demo-mjpgsrv ./sdcard/
 	cp -v facedetapp/facenet ./sdcard/demo-facenet
+	cp -v facedetapp/testcam ./sdcard/testcam
 	cp -v qrcode/qrcode ./sdcard/demo-qrcode
 	cp -v demo-mjpgcloud/cloud.cfg ./sdcard/cloud.cfg
 	cp -v demo-eth/demo-eth ./sdcard/

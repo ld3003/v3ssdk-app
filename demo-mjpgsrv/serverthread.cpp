@@ -65,9 +65,7 @@ void serverthread::run()
     {
     }
     g_cap = new cv::VideoCapture(1);
-
-
-
+    g_cap->set(CV_CAP_PROP_FPS, 10);
 
 
     for (;;)
