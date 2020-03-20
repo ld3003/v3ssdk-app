@@ -81,8 +81,8 @@ mCap = new cv::VideoCapture(1);
         Img = QImage((const uchar*)(tmppic.data), tmppic.cols, tmppic.rows, tmppic.cols * tmppic.channels(), QImage::Format_RGB888);
         emit imgReady(Img);
         //exit(0);
-	int *t = 0;
-	memset(t,0x0,0xFFFF);
+	//int *t = 0;
+	//memset(t,0x0,0xFFFF);
 	
 
     }
